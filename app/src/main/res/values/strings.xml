@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name"></string>
+    <string name="opendrawer">Open</string>
+    <string name="closedrawer">Close</string>
+
+    <string name="feedfrag">Feed</string>
+    <string name="bookfrag">Your Bookings</string>
+    <string name="profilefrag">Your Profile</string>
+    <string name="notificationfrag">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
