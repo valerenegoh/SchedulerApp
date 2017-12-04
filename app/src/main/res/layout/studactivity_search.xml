@@ -23,7 +23,7 @@
             android:layout_gravity="center|bottom"
             android:background="#FFFFFF"
             android:visibility="visible"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/studbottom_navigation_menu" />
 
 
 

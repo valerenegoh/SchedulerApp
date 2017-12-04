@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,7 +16,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StudBookingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBar actionBar;
@@ -27,9 +26,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+        setContentView(R.layout.studactivity_feed);
 
-        getSupportActionBar().setTitle("Feed");
+        getSupportActionBar().setTitle("Your Bookings");
 
         ListView lv =(ListView)findViewById(R.id.profList);
         ArrayList<String> profList = new ArrayList<String>();
@@ -37,7 +36,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         profList.add("Valerene Goh");
         profList.add("Cheryl Goh");
         profList.add("Nigel Chan");
-        ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(FeedActivity.this,android.R.layout.simple_list_item_1,profList);
+        ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(StudBookingActivity.this,android.R.layout.simple_list_item_1,profList);
         lv.setAdapter(lAdapter);
 
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerLayout);
@@ -51,50 +50,56 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView)findViewById(R.id.nav_view);
         final Menu menu1 =navigationView.getMenu();
-        MenuItem dFeed = menu1.getItem(0);
-        dFeed.setChecked(true);
+        MenuItem dBooking = menu1.getItem(1);
+        dBooking.setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case (R.id.side_feed):
-                        drawerLayout.closeDrawer(navigationView);
-                        break;
-                    case (R.id.side_booking):
-                        Intent h= new Intent(FeedActivity.this,BookingActivity.class);
+                        Intent h= new Intent(StudBookingActivity.this,StudFeedActivity.class);
                         startActivity(h);
                         break;
+                    case (R.id.side_booking):
+                        drawerLayout.closeDrawer(navigationView);
+                        break;
                     case (R.id.side_profile):
-                        Intent i= new Intent(FeedActivity.this,ProfileActivity.class);
+                        Intent i= new Intent(StudBookingActivity.this,StudProfileActivity.class);
                         startActivity(i);
+                        break;
+                    case(R.id.ic_search):
+                        Intent j= new Intent(StudBookingActivity.this,StudSearchActivity.class);
+                        startActivity(j);
                         break;
                 }
                 return  false;
             }
         });
 
+
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        final Menu menu = bottomNavigationView.getMenu();
-        MenuItem bFeed = menu.getItem(0);
-        bFeed.setChecked(true);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem bBooking = menu.getItem(1);
+        bBooking.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case (R.id.ic_feed):
-                        break;
-                    case (R.id.ic_booking):
-                        Intent h= new Intent(FeedActivity.this,BookingActivity.class);
+                        Intent h= new Intent(StudBookingActivity.this,StudFeedActivity.class);
                         startActivity(h);
                         break;
+                    case (R.id.ic_booking):
+                        break;
                     case (R.id.ic_profile):
-                        Intent i= new Intent(FeedActivity.this,ProfileActivity.class);
+                        Intent i= new Intent(StudBookingActivity.this,StudProfileActivity.class);
                         startActivity(i);
                         break;
                     case(R.id.ic_search):
-                        Intent j= new Intent(FeedActivity.this,SearchActivity.class);
+                        Intent j= new Intent(StudBookingActivity.this,StudSearchActivity.class);
                         startActivity(j);
                         break;
                 }
@@ -105,12 +110,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.studmenu_main,menu);
         return true;
     }
 
     public void goNextActivity(){
-        startActivity(new Intent(this,NotificationActivity.class)) ;
+        startActivity(new Intent(this,StudNotificationActivity.class)) ;
     }
 
     @Override

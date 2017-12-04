@@ -9,24 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeedActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StudFeedActivity"></activity>
         <activity
-            android:name=".NotificationActivity"
-            android:parentActivityName=".FeedActivity"
+            android:name=".StudNotificationActivity"
+            android:parentActivityName=".StudFeedActivity"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FeedActivity"/>
+                android:value=".StudFeedActivity"/>
         </activity>
-        <activity android:name=".BookingActivity"></activity>
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".SearchActivity"
+        <activity android:name=".StudBookingActivity"></activity>
+        <activity android:name=".StudProfileActivity"></activity>
+        <activity android:name=".StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
 
     </application>

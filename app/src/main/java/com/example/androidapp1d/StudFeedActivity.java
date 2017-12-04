@@ -1,7 +1,6 @@
 package com.example.androidapp1d;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -9,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StudFeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBar actionBar;
@@ -26,9 +26,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+        setContentView(R.layout.studactivity_feed);
 
-        getSupportActionBar().setTitle("Your Profile");
+        getSupportActionBar().setTitle("Feed");
 
         ListView lv =(ListView)findViewById(R.id.profList);
         ArrayList<String> profList = new ArrayList<String>();
@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         profList.add("Valerene Goh");
         profList.add("Cheryl Goh");
         profList.add("Nigel Chan");
-        ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(ProfileActivity.this,android.R.layout.simple_list_item_1,profList);
+        ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(StudFeedActivity.this,android.R.layout.simple_list_item_1,profList);
         lv.setAdapter(lAdapter);
 
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerLayout);
@@ -50,52 +50,50 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         navigationView = (NavigationView)findViewById(R.id.nav_view);
         final Menu menu1 =navigationView.getMenu();
-        MenuItem dProfile = menu1.getItem(2);
-        dProfile.setChecked(true);
+        MenuItem dFeed = menu1.getItem(0);
+        dFeed.setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case (R.id.side_feed):
-                        Intent h= new Intent(ProfileActivity.this,FeedActivity.class);
-                        startActivity(h);
+                        drawerLayout.closeDrawer(navigationView);
                         break;
                     case (R.id.side_booking):
-                        Intent i= new Intent(ProfileActivity.this,BookingActivity.class);
-                        startActivity(i);
+                        Intent h= new Intent(StudFeedActivity.this,StudBookingActivity.class);
+                        startActivity(h);
                         break;
                     case (R.id.side_profile):
-                        drawerLayout.closeDrawer(navigationView);
+                        Intent i= new Intent(StudFeedActivity.this,StudProfileActivity.class);
+                        startActivity(i);
                         break;
                 }
                 return  false;
             }
         });
 
-
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         final Menu menu = bottomNavigationView.getMenu();
-        MenuItem bProfile = menu.getItem(2);
-        bProfile.setChecked(true);
+        MenuItem bFeed = menu.getItem(0);
+        bFeed.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case (R.id.ic_feed):
-                        Intent h= new Intent(ProfileActivity.this,FeedActivity.class);
-                        startActivity(h);
                         break;
                     case (R.id.ic_booking):
-                        Intent i= new Intent(ProfileActivity.this,BookingActivity.class);
-                        startActivity(i);
+                        Intent h= new Intent(StudFeedActivity.this,StudBookingActivity.class);
+                        startActivity(h);
                         break;
                     case (R.id.ic_profile):
+                        Intent i= new Intent(StudFeedActivity.this,StudProfileActivity.class);
+                        startActivity(i);
                         break;
                     case(R.id.ic_search):
-                        Intent j= new Intent(ProfileActivity.this,SearchActivity.class);
+                        Intent j= new Intent(StudFeedActivity.this,StudSearchActivity.class);
                         startActivity(j);
                         break;
                 }
@@ -106,12 +104,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.studmenu_main,menu);
         return true;
     }
 
     public void goNextActivity(){
-        startActivity(new Intent(this,NotificationActivity.class)) ;
+        startActivity(new Intent(this,StudNotificationActivity.class)) ;
     }
 
     @Override

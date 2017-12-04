@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -17,14 +13,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class StudSearchActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private ArrayAdapter<String> lAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.studactivity_search);
 
         ListView lv =(ListView)findViewById(R.id.profList);
         ArrayList<String> profList = new ArrayList<String>();
@@ -32,7 +28,7 @@ public class SearchActivity extends AppCompatActivity {
         profList.add("Valerene Goh");
         profList.add("Cheryl Goh");
         profList.add("Nigel Chan");
-        lAdapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,profList);
+        lAdapter = new ArrayAdapter<String>(StudSearchActivity.this,android.R.layout.simple_list_item_1,profList);
         lv.setAdapter(lAdapter);
 
         actionBar = getSupportActionBar();
@@ -49,15 +45,15 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case (R.id.ic_feed):
-                        Intent h= new Intent(SearchActivity.this,FeedActivity.class);
+                        Intent h= new Intent(StudSearchActivity.this,StudFeedActivity.class);
                         startActivity(h);
                         break;
                     case (R.id.ic_booking):
-                        Intent j= new Intent(SearchActivity.this,BookingActivity.class);
+                        Intent j= new Intent(StudSearchActivity.this,StudBookingActivity.class);
                         startActivity(j);
                         break;
                     case (R.id.ic_profile):
-                        Intent i= new Intent(SearchActivity.this,ProfileActivity.class);
+                        Intent i= new Intent(StudSearchActivity.this,StudProfileActivity.class);
                         startActivity(i);
                         break;
                     case(R.id.ic_search):
@@ -70,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search,menu);
+        getMenuInflater().inflate(R.menu.studmenu_search,menu);
         MenuItem item = menu.findItem(R.id.menuSearch);
         android.widget.SearchView searchView = (android.widget.SearchView)item.getActionView();
         searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
