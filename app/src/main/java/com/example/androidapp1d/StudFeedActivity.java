@@ -108,8 +108,12 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
-    public void goNextActivity(){
+    public void goNotificationActivity(){
         startActivity(new Intent(this,StudNotificationActivity.class)) ;
+    }
+
+    public void goSearchActivity(){
+        startActivity(new Intent(this,StudSearchActivity.class)) ;
     }
 
     @Override
@@ -129,7 +133,10 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
             }
         }
         if (id==R.id.menu_item_add){
-            goNextActivity();
+            goNotificationActivity();
+        }
+        if (id == R.id.ic_search){
+            goSearchActivity();
         }
         return super.onOptionsItemSelected(item);
     }

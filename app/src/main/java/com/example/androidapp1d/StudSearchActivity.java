@@ -37,8 +37,6 @@ public class StudSearchActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         final Menu menu = bottomNavigationView.getMenu();
-        MenuItem bSearch = menu.getItem(3);
-        bSearch.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
