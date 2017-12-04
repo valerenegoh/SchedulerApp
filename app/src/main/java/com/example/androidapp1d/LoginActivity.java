@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginbutton;
+    private Button tempbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent studentActivity = new Intent(LoginActivity.this, StudFeedActivity.class);
                 startActivity(studentActivity);
+            }
+        });
+
+        tempbutton=(Button) findViewById(R.id.loginprof);
+        tempbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profActivity = new Intent(LoginActivity.this, ProfFeedActivity.class);
+                startActivity(profActivity);
             }
         });
     }

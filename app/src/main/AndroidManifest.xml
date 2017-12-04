@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".StudBookingActivity"></activity>
         <activity android:name=".StudProfileActivity"></activity>
+        <activity android:name=".ProfFeedActivity"></activity>
         <activity android:name=".StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
 
