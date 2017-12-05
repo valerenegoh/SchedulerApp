@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.androidapp1d.ProfBookingActivity">
+    tools:context="com.example.androidapp1d.ProfBookingActivity"
+    android:fitsSystemWindows="true">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawerLayout"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/profList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#dedede" />
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#FFFFFF"
+            app:menu="@menu/profnav_bar" />
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/fragmentholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavView_Bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:background="#FFFFFF"
+            android:visibility="visible"
+            app:menu="@menu/profbottom_navigation_menu" />
+
+
+
+    </FrameLayout>
+
+</RelativeLayout>
