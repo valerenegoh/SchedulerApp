@@ -15,6 +15,7 @@ public class StudBookingMod extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stud_bookingmods);
+        System.out.println("HI");
 
     }
 }
