@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -44,5 +45,66 @@
 
 
     </FrameLayout>
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/proffeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="prof feed" />
+
+    <ImageView
+        android:id="@+id/sutdlogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/mojov3front_2"
+        />
+
+    <TextView
+        android:id="@+id/card01title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student has requested for consultation"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:id="@+id/card01about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MOJO Issues"
+        android:textSize="12dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/card01details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DETAILS"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/card01accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCEPT"
+            android:textSize="14dp"/>
+
+        <Button
+            android:id="@+id/card01reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REJECT"
+            android:textSize="14dp"/>
+
+    </LinearLayout>
+>>>>>>> tracy
 
 </RelativeLayout>
