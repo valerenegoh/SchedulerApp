@@ -12,12 +12,36 @@
         android:layout_height="match_parent"
         android:id="@+id/drawerLayout"
         android:orientation="vertical">
-        <ListView
-            android:id="@+id/profList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#dedede" />
+        <TabHost
+            android:id="@+id/bookingsTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></TabWidget>
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <include
+                        android:id="@+id/Professors"
+                        layout="@layout/stud_bookingprofs"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"></include>
+                    <include
+                        android:id="@+id/Modules"
+                        layout="@layout/stud_bookingmods"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"></include>
 
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"

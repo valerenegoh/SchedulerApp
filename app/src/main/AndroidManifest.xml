@@ -30,6 +30,8 @@
         <activity android:name=".ProfFeedActivity"></activity>
         <activity android:name=".StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".StudBookingProf"></activity>
+        <activity android:name=".StudBookingMod"></activity>
 
     </application>
 
