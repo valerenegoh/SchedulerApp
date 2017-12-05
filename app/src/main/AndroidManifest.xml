@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidapp1d">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,15 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StudFeedActivity"></activity>
+        <activity android:name=".StudFeedActivity" />
         <activity
             android:name=".StudNotificationActivity"
-            android:parentActivityName=".StudFeedActivity"
-            >
+            android:parentActivityName=".StudFeedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudFeedActivity"/>
+                android:value=".StudFeedActivity" />
         </activity>
+<<<<<<< HEAD
         <activity android:name=".StudBookingActivity"></activity>
         <activity android:name=".StudProfileActivity"></activity>
         <activity android:name=".ProfFeedActivity"></activity>
@@ -33,6 +35,18 @@
         <activity android:name=".StudBookingProf"></activity>
         <activity android:name=".StudBookingMod"></activity>
 
+=======
+        <activity android:name=".StudBookingActivity" />
+        <activity android:name=".StudProfileActivity" />
+        <activity android:name=".ProfFeedActivity" />
+        <activity
+            android:name=".StudSearchActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ProfBookingActivity" />
+        <activity android:name=".ProfNotificationActivity" />
+        <activity android:name=".ProfProfileActivity" />
+        <activity android:name=".ProfSearchActivity"></activity>
+>>>>>>> origin/yfbranch
     </application>
 
 </manifest>
