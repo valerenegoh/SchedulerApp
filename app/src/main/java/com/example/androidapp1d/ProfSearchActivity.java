@@ -64,8 +64,8 @@ public class ProfSearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profmenu_main,menu);
-        MenuItem item = menu.findItem(R.id.menuSearch);
+        getMenuInflater().inflate(R.menu.profmenu_search,menu);
+        MenuItem item = menu.findItem(R.id.menuSearchProf);
         android.widget.SearchView searchView = (android.widget.SearchView)item.getActionView();
         searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
