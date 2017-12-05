@@ -33,7 +33,9 @@
             android:name=".StudSearchActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ProfBookingActivity" />
-        <activity android:name=".ProfNotificationActivity"></activity>
+        <activity android:name=".ProfNotificationActivity" />
+        <activity android:name=".ProfProfileActivity" />
+        <activity android:name=".ProfSearchActivity"></activity>
     </application>
 
 </manifest>
