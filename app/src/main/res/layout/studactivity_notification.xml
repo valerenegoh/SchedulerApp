@@ -5,4 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.androidapp1d.StudNotificationActivity">
 
+
+
 </android.support.constraint.ConstraintLayout>
