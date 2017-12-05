@@ -10,11 +10,6 @@
         android:layout_height="match_parent"
         android:id="@+id/drawerLayout"
         android:orientation="vertical">
-        <ListView
-            android:id="@+id/profList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#dedede" />
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.SearchView
-        android:id="@+id/searchModules"
+        android:id="@+id/searchUpcoming"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -14,12 +14,13 @@
         android:drawableLeft="@drawable/search"
         android:drawablePadding="10dp"
         android:padding="5dp"
-        android:queryHint="Search modules here"/>
+        android:queryHint="Search upcoming bookings here"/>
 
-    <ListView
-        android:id="@+id/modulesList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerviewUpcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#dedede" />
+        android:layout_marginTop="10dp">
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

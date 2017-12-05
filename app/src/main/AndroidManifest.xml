@@ -26,7 +26,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".StudFeedActivity" />
         </activity>
-<<<<<<< HEAD
         <activity android:name=".StudBookingActivity"></activity>
         <activity android:name=".StudProfileActivity"></activity>
         <activity android:name=".ProfFeedActivity"></activity>
@@ -35,18 +34,10 @@
         <activity android:name=".StudBookingProf"></activity>
         <activity android:name=".StudBookingMod"></activity>
 
-=======
-        <activity android:name=".StudBookingActivity" />
-        <activity android:name=".StudProfileActivity" />
-        <activity android:name=".ProfFeedActivity" />
-        <activity
-            android:name=".StudSearchActivity"
-            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ProfBookingActivity" />
         <activity android:name=".ProfNotificationActivity" />
         <activity android:name=".ProfProfileActivity" />
         <activity android:name=".ProfSearchActivity"></activity>
->>>>>>> origin/yfbranch
     </application>
 
 </manifest>

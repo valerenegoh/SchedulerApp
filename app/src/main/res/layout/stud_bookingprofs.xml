@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/search_bar"
-        android:drawableStart="@drawable/search"
+        android:drawableLeft="@drawable/search"
         android:drawablePadding="10dp"
         android:padding="5dp"
         android:queryHint="Search professors here"/>

@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
  * Created by ASUS on 12/5/2017.
  */
 
-public class StudBookingMod extends AppCompatActivity {
-
+public class StudBookingPrevious extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stud_bookingmods);
+        setContentView(R.layout.stud_bookingprevious);
     }
 }

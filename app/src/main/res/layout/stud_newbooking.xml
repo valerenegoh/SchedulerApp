@@ -13,7 +13,7 @@
         android:id="@+id/drawerLayout"
         android:orientation="vertical">
         <TabHost
-            android:id="@+id/bookingsTab"
+            android:id="@+id/newbookingsTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -29,18 +29,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <include
-                        android:id="@+id/Upcoming"
-                        layout="@layout/stud_bookingupcoming"
+                        android:id="@+id/Professors"
+                        layout="@layout/stud_bookingprofs"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"></include>
                     <include
-                        android:id="@+id/Previous"
-                        layout="@layout/stud_bookingprevious"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"></include>
-                    <include
-                        android:id="@+id/Favourites"
-                        layout="@layout/stud_bookingfavourites"
+                        android:id="@+id/Modules"
+                        layout="@layout/stud_bookingmods"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"></include>
 
@@ -56,8 +51,6 @@
             app:menu="@menu/studnav_bar" />
     </android.support.v4.widget.DrawerLayout>
 
-
-
     <FrameLayout
         android:id="@+id/fragmentholder"
         android:layout_width="match_parent"
@@ -71,8 +64,6 @@
             android:background="#FFFFFF"
             android:visibility="visible"
             app:menu="@menu/studbottom_navigation_menu" />
-
-
 
     </FrameLayout>
 
