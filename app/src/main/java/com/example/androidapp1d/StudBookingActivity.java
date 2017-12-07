@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -36,6 +38,8 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
     private ActionBar actionBar;
     private NavigationView navigationView;
     private TabHost tabHost;
+    private FloatingActionButton addBooking;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference allBookingsDatabaseReference;
     private Query upcomingBookingsQuery;
@@ -48,6 +52,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.studactivity_booking);
 
@@ -55,36 +60,34 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
         tabHost = (TabHost) findViewById(R.id.bookingsTab);
         tabHost.setup();
-        TabHost.TabSpec upcomingTab = tabHost.newTabSpec("UPCOMING BOOKINGS TAB");
-        upcomingTab.setIndicator("UPCOMING BOOKINGS TAB");
+        TabHost.TabSpec upcomingTab = tabHost.newTabSpec("UPCOMING");
+        upcomingTab.setIndicator("UPCOMING");
         upcomingTab.setContent(R.id.Upcoming);
         tabHost.addTab(upcomingTab);
 
-        TabHost.TabSpec prevTab = tabHost.newTabSpec("PREVIOUS BOOKINGS TAB");
-        prevTab.setIndicator("PREVIOUS BOOKINGS TAB");
+        TabHost.TabSpec prevTab = tabHost.newTabSpec("PREVIOUS");
+        prevTab.setIndicator("PREVIOUS");
         prevTab.setContent(R.id.Previous);
         tabHost.addTab(prevTab);
 
-        TabHost.TabSpec favTab = tabHost.newTabSpec("FAVOURITES BOOKINGS TAB");
-        favTab.setIndicator("MODS TAB");
+        TabHost.TabSpec favTab = tabHost.newTabSpec("FAVOURITES");
+        favTab.setIndicator("FAVOURITES");
         favTab.setContent(R.id.Favourites);
         tabHost.addTab(favTab);
 
-        //TODO: fetch booking details id from firebase & store its details in ArrayList
+        addBooking = (FloatingActionButton) findViewById(R.id.addBookingsButton);
+        addBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StudBookingActivity.this, StudnewBookingActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //fetch booking details (by instantiation id) from firebase & store its details in ArrayList
         firebaseDatabase = FirebaseDatabase.getInstance();
         allBookingsDatabaseReference = firebaseDatabase.getReference().child("Students").child(KEY).child("allBookings");
         favBookingsDatabaseReference =  firebaseDatabase.getReference().child("Students").child(KEY).child("favBookings");
-
-        /*
-        for(booking in bookingsDatabaseReference.child("allBookings"){
-            DatabaseReference date = bookingsDatabaseReference.child("date");
-            if(todayDate.before(date))
-                store booking id into Integer[] rawUpcomingBookings
-            if(todayDate.after(date))
-                store into Integer[] rawPreviousBookings
-        }
-        Integer[] favouriteBookings =  bookingsDatabaseReference.child("favouriteBookings");
-        */
 
         //================================UPCOMING TAB================================
         upcomingBookingsQuery = allBookingsDatabaseReference.orderByChild("timestamp").startAt(new Date().getTime());
@@ -251,8 +254,6 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
             }
         });
 
-
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem bBooking = menu.getItem(1);
@@ -280,6 +281,9 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                 return false;
             }
         });
+        } catch(Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public ArrayList<StudBookingItem> getBookingItems(ArrayList<Integer> rawBookingItems){
