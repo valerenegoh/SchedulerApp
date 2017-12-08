@@ -12,11 +12,13 @@
         android:layout_height="match_parent"
         android:id="@+id/drawerLayout"
         android:orientation="vertical">
-        <ListView
-            android:id="@+id/profList"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewUpcoming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#dedede" />
+            android:layout_marginTop="10dp">
+        </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.androidapp1d.ProfBookingActivity"
+    tools:context="com.example.androidapp1d.Prof.ProfBookingActivity"
     android:fitsSystemWindows="true">
 
     <android.support.v4.widget.DrawerLayout

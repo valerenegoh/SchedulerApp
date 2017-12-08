@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:fitsSystemWindows="true">
+
+
+    <FrameLayout
+        android:id="@+id/fragmentholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavView_Bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:background="#FFFFFF"
+            android:visibility="visible"
+            app:menu="@menu/studbottom_navigation_menu" />
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/circular_profile"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_alignParentLeft="true"
+                            android:innerRadius="0dp"
+                            android:shape="ring"
+                            android:thicknessRatio="1.9"
+                            app:cardCornerRadius="40dp">
+
+                            <ImageView
+                                android:id="@+id/profile_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/person"></ImageView>
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/display_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/circular_profile"
+                            android:text="Display Name"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/display_name"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/circular_profile"
+                            android:text="ISTD Pillar" />
+                    </RelativeLayout>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/bibliography"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp"
+                                android:src="@drawable/info"></ImageView>
+
+                            <TextView
+                                android:id="@+id/bibliography_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/bibliography"
+                                android:textStyle="bold"
+                                android:paddingTop="17dp"
+                                android:paddingBottom="10dp"
+                                android:text="Bibliography" />
+
+                            <TextView
+                                android:id="@+id/bibliography_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/bibliography"
+                                android:layout_below="@id/bibliography_title"
+                                android:text="lorem ipsum"
+                                android:paddingBottom="10dp"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grey" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/modules_taught"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/modules"></ImageView>
+
+                        <TextView
+                            android:id="@+id/modules_taught_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/modules_taught"
+                            android:textStyle="bold"
+                            android:paddingTop="17dp"
+                            android:paddingBottom="10dp"
+                            android:text="Modules" />
+
+                        <TextView
+                            android:id="@+id/modules_taught_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/modules_taught"
+                            android:layout_below="@id/modules_taught_title"
+                            android:text="10.009 Digital World\n50.002 Computation Structures"
+                            android:paddingBottom="10dp"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grey" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/contact_details_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:textStyle="bold"
+                            android:paddingTop="17dp"
+                            android:paddingBottom="10dp"
+                            android:text="Contact Details" />
+
+                        <ImageView
+                            android:id="@+id/office_hours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/contact_details_title"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/time"></ImageView>
+
+                        <TextView
+                            android:id="@+id/office_hours_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/office_hours"
+                            android:layout_below="@id/contact_details_title"
+                            android:paddingTop="5dp"
+                            android:textStyle="italic"
+                            android:text="Office Hours:" />
+
+                        <TextView
+                            android:id="@+id/office_hours_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/office_hours"
+                            android:layout_below="@id/office_hours_title"
+                            android:text="Wednesday 3.30pm - 5pm"
+                            android:paddingBottom="10dp"/>
+
+                        <ImageView
+                            android:id="@+id/office_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/office_hours_details"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/location"></ImageView>
+
+                        <TextView
+                            android:id="@+id/office_location_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/office_hours"
+                            android:layout_below="@id/office_hours_details"
+                            android:paddingTop="5dp"
+                            android:textStyle="italic"
+                            android:text="Office Location:" />
+
+                        <TextView
+                            android:id="@+id/office_location_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/office_location"
+                            android:layout_below="@id/office_location_title"
+                            android:text="1.502.27"
+                            android:paddingBottom="10dp"/>
+
+                        <ImageView
+                            android:id="@+id/email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/office_location_details"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/email"></ImageView>
+
+                        <TextView
+                            android:id="@+id/email_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/email"
+                            android:layout_below="@id/office_location_details"
+                            android:paddingTop="5dp"
+                            android:textStyle="italic"
+                            android:text="Email:" />
+
+                        <TextView
+                            android:id="@+id/email_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/office_location"
+                            android:layout_below="@id/email_title"
+                            android:text="oka_kurniawan@mymail.sutd.edu.sg"
+                            android:paddingBottom="10dp"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grey" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/consultButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="consult"
+                        android:layout_alignParentRight="true"
+                        android:background="@null" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="bottom"/>
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </ScrollView>
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#FFFFFF"
+                app:menu="@menu/studnav_bar" />
+        </android.support.v4.widget.DrawerLayout>
+
+
+    </FrameLayout>
+
+</RelativeLayout>

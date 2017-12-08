@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </CalendarView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Friday, 9 December 2017"
+            android:gravity="right"/>
+
+        <View
+            android:id="@+id/line1"
+            android:background="@color/grey"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/date"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ListView
+            android:id="@+id/all_slots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </LinearLayout>
+</LinearLayout>

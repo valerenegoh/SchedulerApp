@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="grey">#A9A9A9</color>
+    <color name="emptySlot">#39F38C</color>
+    <color name="halfEmptySlot">#F1F339</color>
+    <color name="fullSlot">#F34839</color>
 </resources>

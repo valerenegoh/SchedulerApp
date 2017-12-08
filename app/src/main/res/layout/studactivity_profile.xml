@@ -26,8 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
+
                 <android.support.v7.widget.CardView
-                    android:id="@+id/circular_profile"
+                    android:id="@+id/circular_studentprofile"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     app:cardCornerRadius="40dp"
@@ -44,23 +45,26 @@
                         android:layout_centerHorizontal="true">
                     </ImageView>
                 </android.support.v7.widget.CardView>
+
                 <TextView
                     android:id="@+id/display_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/circular_profile"
+                    android:layout_toRightOf="@id/circular_studentprofile"
                     android:text="Display Name"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="5dp"
                     android:textStyle="bold"
                     android:textSize="20dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/circular_profile"
+                    android:layout_toRightOf="@id/circular_studentprofile"
                     android:layout_below="@id/display_name"
                     android:text="Student ID"
                     android:layout_marginLeft="30dp"/>
+
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -195,7 +199,6 @@
     </android.support.v4.widget.DrawerLayout>
 
 
-
     <FrameLayout
         android:id="@+id/fragmentholder"
         android:layout_width="match_parent"
@@ -209,8 +212,6 @@
             android:background="#FFFFFF"
             android:visibility="visible"
             app:menu="@menu/studbottom_navigation_menu" />
-
-
 
     </FrameLayout>
 

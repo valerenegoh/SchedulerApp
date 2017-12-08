@@ -16,66 +16,60 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/bookingsTitle"
+            android:id="@+id/announcement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="50.002 starting in 20 min!"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/feedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/announcement"
             android:text="title"/>
 
         <TextView
-            android:id="@+id/bookingsProf"
+            android:id="@+id/feedProf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bookingsTitle"
+            android:layout_below="@+id/feedTitle"
             android:text="prof"/>
 
         <TextView
-            android:id="@+id/bookingsVenue"
+            android:id="@+id/feed_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bookingsProf"
-            android:text="venue"/>
-
-        <TextView
-            android:id="@+id/bookingsDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/bookingsTitle"
+            android:layout_below="@+id/announcement"
             android:layout_alignParentRight="true"
-            android:text="date"/>
+            android:text="3.00-4.00pm"/>
 
         <View
-            android:id="@+id/line6"
+            android:id="@+id/line5"
             android:background="@color/colorPrimaryDark"
             android:layout_width = "match_parent"
-            android:layout_below="@+id/bookingsVenue"
+            android:layout_below="@+id/feedProf"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
         <TextView
-            android:id="@+id/bookingsDescription"
+            android:id="@+id/feedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line6"
+            android:layout_below="@+id/line5"
             android:text="description"/>
 
         <Button
-            android:id="@+id/bookingcardDetailsButton"
+            android:id="@+id/feedDetailsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Details"
-            android:layout_below="@+id/bookingsDescription"
+            android:layout_below="@+id/feedDescription"
             android:layout_alignParentRight="true"
-            android:background="@null"/>
-
-        <Button
-            android:id="@+id/bookingcardDeleteorWithdrawButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:layout_below="@+id/bookingsDescription"
-            android:layout_toLeftOf="@+id/bookingcardDetailsButton"
             android:background="@null"/>
 
     </RelativeLayout>

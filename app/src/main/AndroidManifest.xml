@@ -18,26 +18,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StudFeedActivity" />
+        <activity android:name=".Stud.Feed.StudFeedActivity" />
         <activity
-            android:name=".StudNotificationActivity"
-            android:parentActivityName=".StudFeedActivity">
+            android:name=".Stud.StudNotificationActivity"
+            android:parentActivityName=".Stud.Feed.StudFeedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudFeedActivity" />
+                android:value=".Stud.Feed.StudFeedActivity" />
         </activity>
-        <activity android:name=".StudBookingActivity"></activity>
-        <activity android:name=".StudProfileActivity"></activity>
-        <activity android:name=".ProfFeedActivity"></activity>
-        <activity android:name=".StudSearchActivity"
+        <activity android:name=".Stud.Booking.StudBookingActivity"></activity>
+        <activity android:name=".Stud.Profile.StudProfileActivity"></activity>
+        <activity android:name=".Prof.ProfFeedActivity"></activity>
+        <activity android:name=".Stud.StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".StudBookingProf"></activity>
-        <activity android:name=".StudBookingMod"></activity>
 
-        <activity android:name=".ProfBookingActivity" />
-        <activity android:name=".ProfNotificationActivity" />
-        <activity android:name=".ProfProfileActivity" />
-        <activity android:name=".ProfSearchActivity"></activity>
+        <activity android:name=".Stud.Booking.StudBookingProf"></activity>
+        <activity android:name=".Stud.Booking.StudBookingMod"></activity>
+        <activity android:name=".Stud.Booking.StudBookingUpcoming"></activity>
+        <activity android:name=".Stud.Booking.StudBookingPrevious"></activity>
+        <activity android:name=".Stud.Booking.StudBookingFavourites"></activity>
+        <activity android:name=".Stud.Booking.StudProfDetails"></activity>
+        <activity android:name=".Stud.Booking.StudBookingProfSlot"></activity>
+
+        <activity android:name=".Prof.ProfBookingActivity" />
+        <activity android:name=".Prof.ProfNotificationActivity" />
+        <activity android:name=".Prof.ProfProfileActivity" />
+        <activity android:name=".Prof.ProfSearchActivity"></activity>
+
     </application>
 
 </manifest>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="book"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/line1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_toLeftOf="@id/bookButton">
+
+        <RelativeLayout
+            android:id="@+id/slot_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:id="@+id/booking_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:text="50.002 Lab6"/>
+
+            <TextView
+                android:id="@+id/time_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/booking_title"
+                android:text="2:00PM - 3:00PM"/>
+
+            <TextView
+                android:id="@+id/bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/time_slot"
+                android:layout_below="@id/booking_title"
+                android:text=" | "/>
+
+            <TextView
+                android:id="@+id/availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/bar"
+                android:layout_below="@id/booking_title"
+                android:text="Available"/>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/availabilityIndicator"
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/slot_info"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/emptySlot" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
