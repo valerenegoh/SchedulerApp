@@ -67,7 +67,7 @@ public class StudBookingListViewAdapter extends BaseAdapter {
         holder.availability = (TextView) rowView.findViewById(R.id.availability);
         holder.book = (Button) rowView.findViewById(R.id.bookButton);
 
-        holder.tile.setBackgroundColor(colors.get(position));
+        holder.tile.setBackgroundResource(colors.get(position));
         holder.timeSlot.setText(timeSlots.get(position));
         holder.availability.setText(availability.get(position));
         if(bookingIDs.get(position) != null){
@@ -94,5 +94,4 @@ public class StudBookingListViewAdapter extends BaseAdapter {
         }
         return rowView;
     }
-
 }

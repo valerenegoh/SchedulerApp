@@ -32,6 +32,7 @@
         <activity android:name=".Stud.StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
 
+        <activity android:name=".Stud.Booking.StudnewBookingActivity"></activity>
         <activity android:name=".Stud.Booking.StudBookingProf"></activity>
         <activity android:name=".Stud.Booking.StudBookingMod"></activity>
         <activity android:name=".Stud.Booking.StudBookingUpcoming"></activity>
@@ -39,11 +40,18 @@
         <activity android:name=".Stud.Booking.StudBookingFavourites"></activity>
         <activity android:name=".Stud.Booking.StudProfDetails"></activity>
         <activity android:name=".Stud.Booking.StudBookingProfSlot"></activity>
+        <activity android:name=".Stud.Booking.StudBookingApplication"></activity>
+        <activity android:name=".Stud.Booking.StudBookingDetails"></activity>
+        <activity android:name=".Stud.Booking.StudBookingDetailsDetails"></activity>
+        <activity android:name=".Stud.Booking.StudBookingDetailsMembers"></activity>
+        <activity android:name=".Stud.Booking.StudBookingDetailsComments"></activity>
 
         <activity android:name=".Prof.ProfBookingActivity" />
         <activity android:name=".Prof.ProfNotificationActivity" />
         <activity android:name=".Prof.ProfProfileActivity" />
         <activity android:name=".Prof.ProfSearchActivity"></activity>
+
+        <activity android:name=".MainActivity"></activity>
 
     </application>
 

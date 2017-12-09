@@ -31,12 +31,12 @@
             android:elevation="4dp"
             android:src="@drawable/add"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewFavourites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-    </android.support.v7.widget.RecyclerView>
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewFavourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

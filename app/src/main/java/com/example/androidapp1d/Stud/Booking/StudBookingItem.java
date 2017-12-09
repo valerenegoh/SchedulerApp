@@ -1,7 +1,5 @@
 package com.example.androidapp1d.Stud.Booking;
 
-import android.content.Context;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,25 +13,24 @@ import java.util.Date;
  */
 
 public class StudBookingItem {
-    private Integer id;
     private String title;
     private String prof;
     private String venue;
     private String date;
+//    private ArrayList<String> students = new ArrayList<>();
     private String description;
     private String mod;
-    private String capacity;
-    private String timestamp;
+    private Integer capacity;
+    private long timestamp;
     private String timing;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference bookingsDatabaseReference;
 
     public StudBookingItem() {
     }
 
-    //for testing purposes
-    public StudBookingItem(Context context, Integer id) {
-        this.id = id;
+    public StudBookingItem(Integer id) {
         firebaseDatabase = FirebaseDatabase.getInstance();
         bookingsDatabaseReference = firebaseDatabase.getReference().child("Bookings").child(id.toString());
     }
@@ -122,11 +119,11 @@ public class StudBookingItem {
         return mod;
     }
 
-    public String getCapacity() {
+    public Integer getCapacity() {
         bookingsDatabaseReference.child("capacity").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                capacity = (String) dataSnapshot.getValue();
+                capacity = dataSnapshot.getValue(Integer.class);
             }
 
             @Override
@@ -140,14 +137,14 @@ public class StudBookingItem {
         bookingsDatabaseReference.child("timestamp").startAt(new Date().getTime()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                timestamp = (String) dataSnapshot.getValue();
+                timestamp = dataSnapshot.getValue(Long.class);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        return Long.parseLong(timestamp);
+        return timestamp;
     }
 
     public String getTiming() {

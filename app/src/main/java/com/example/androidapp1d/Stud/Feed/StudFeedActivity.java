@@ -158,7 +158,7 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
     public ArrayList<StudBookingItem> getBookingItems(ArrayList<Integer> rawBookingItems){
         ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
         for (int i = 0; i < rawBookingItems.size(); i++) {
-            StudBookingItem bookingItem = new StudBookingItem(this, rawBookingItems.get(i));
+            StudBookingItem bookingItem = new StudBookingItem(rawBookingItems.get(i));
             bookingItems.add(bookingItem);
         }
         return bookingItems;
