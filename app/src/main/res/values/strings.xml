@@ -11,4 +11,145 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="freshmore_modules">
+        <item>10.001 Advanced Mathematics I</item>
+        <item>10.002 Physics I</item>
+        <item>10.006 Chemistry and Biology: Natural World</item>
+        <item>02.001 World Texts and Interpretations </item>
+        <item>10.004 Advanced Mathematics II</item>
+        <item>10.005 Physics II</item>
+        <item>02.003 Theorizing Society, the Self, and Culture</item>
+        <item>03.007 Introduction to Design</item>
+        <item>10.007 Modelling the Systems World</item>
+        <item>10.008 Engineering in the Physical World</item>
+        <item>10.009 The Digital World</item>
+        <item>10.011 Introduction to Physical Chemistry​</item>
+        <item>10.012 Introduction to Biology</item>
+    </string-array>
+
+    <string-array name="ISTD_modules">
+        <item>50.001 Introduction to Information Systems and Programming</item>
+        <item>50.002 Computational Structures</item>
+        <item>50.003 Elements of Software Construction</item>
+        <item>50.004 Introduction to Algorithms</item>
+        <item>50.005 Computer System Engineering</item>
+        <item>50.006 User Interface Design and Implementation</item>
+        <item>50.008 Database Management Systems</item>
+        <item>50.012 Networks</item>
+        <item>50.017 Graphics and Visualisation</item>
+        <item>50.020 Security</item>
+        <item>50.021 Artificial Intelligence</item>
+        <item>50.033 Foundations of Game Design and Development</item>
+        <item>50.034 Introduction to Probability and Statistics</item>
+        <item>01.112 Machine Learning</item>
+        <item>Computer Vision</item>
+    </string-array>
+
+    <string-array name="EPD_modules">
+        <item>01.101 Global Health Technologies</item>
+        <item>01.106 Engineering Management</item>
+        <item>01.111 Culture Formation and Innovative Product Design</item>
+        <item>02.208 Microeconomics</item>
+        <item>30.001 Structures and Materials</item>
+        <item>30.002 Circuits and Electronics</item>
+        <item>30.003 Introduction To Probability and Statistics</item>
+        <item>30.007 Engineering Design and Project Engineering</item>
+        <item>30.101 Systems and Control</item>
+        <item>30.104 Dynamics</item>
+        <item>30.105 Machine Element Design</item>
+        <item>30.106 Microelectronics Circuits and Devices</item>
+        <item>30.107 Power Electronics</item>
+        <item>30.108 Material Science</item>
+        <item>30.109 Thermal Systems For Power and Environment</item>
+        <item>30.110 Digital Systems Laboratory</item>
+        <item>30.111 Entrepreneurship</item>
+        <item>30.113 Design and Fabrication of MEMS</item>
+        <item>30.114 Advanced Feedback and Control</item>
+        <item>30.115 Digital Signal Processing</item>
+        <item>30.116 Introduction to Nano-electronics</item>
+        <item>30.117 Electric Power Systems Analysis and Design</item>
+        <item>30.118 Optical Engineering and Communications</item>
+        <item>30.119 Theory and Applications of Robotics</item>
+        <item>30.201 Wireless Communications</item>
+        <item>30.207 Structural Mechanics and Design</item>
+        <item>30.123 Healthcare Product Design</item>
+        <item>30.200 Micro-Nano Projects Laboratory</item>
+        <item>30.202 Digital Integrated Circuits Design</item>
+        <item>30.203 Topics in Biomedical and Healthcare Engineering</item>
+        <item>30.205 Aerodynamics</item>
+        <item>30.206 SMU Design Management</item>
+    </string-array>
+
+    <string-array name="ESD_modules">
+        <item>01.102 Energy Systems and Management</item>
+        <item>01.104 Networked Life</item>
+        <item>01.107 Urban Transportation</item>
+        <item>40.001 Probability</item>
+        <item>40.002 Optimisation</item>
+        <item>40.003 Operations Management</item>
+        <item>40.004 Statistics</item>
+        <item>40.005 Stochastic Modelling</item>
+        <item>40.006 Network Modelling</item>
+        <item>40.007 Decision Analysis</item>
+        <item>40.008 Quality and Reliability</item>
+        <item>40.009 Simulation</item>
+        <item>40.010 Project Management</item>
+        <item>40.011 Data and Business Analytics</item>
+        <item>40.012 Manufacturing and Service Operations</item>
+        <item>40.013 Network Analysis and Control</item>
+        <item>40.014 Engineering Systems Architecture</item>
+        <item>40.015 Simulation Modelling and Analysis</item>
+        <item>40.220 The Analytics Edge</item>
+        <item>40.230 Sustainable Engineering</item>
+        <item>40.232 Water Resources Management</item>
+        <item>40.240 Finance Theory</item>
+        <item>40.242 Mathematical Finance</item>
+        <item>40.242 Derivative Pricing and Risk Management</item>
+        <item>40.244 Stochastic Calculus for Finance</item>
+        <item>40.246 Computational Methods in Finance</item>
+        <item>40.260 Supply Chain Management</item>
+        <item>40.302 Advanced Topics in Optimisation</item>
+        <item>40.305 Advanced Topics in Stochastic Modelling</item>
+        <item>40.316 Game Theory</item>
+        <item>40.317 Financial Systems Design</item>
+        <item>40.318 Global Trade and Logistics</item>
+        <item>45.240 Trade Finance</item>
+        <item>50.008 Database</item>
+    </string-array>
+
+    <string-array name="ASD_modules">
+        <item>20.013 Integrated Building Systems</item>
+        <item>20.101 Architecture Core Studio 1</item>
+        <item>20.102 Architecture Core Studio 2</item>
+        <item>20.103 Architecture Core Studio 3</item>
+        <item>20.111 Sustainable Design Option Studio 1</item>
+        <item>20.211 Introduction to Design Computation</item>
+        <item>20.221 History, Theory and Culture 1</item>
+        <item>20.222 History, Theory and Culture 2</item>
+        <item>20.223 History, Theory and Culture 3: Contemporary Architecture Between Technology, Science and Culture</item>
+        <item>20.201 Architectural Science and Technology</item>
+        <item>20.202 Architectural Structure and Enclosure Design</item>
+        <item>20.203 Architectural Energy Systems</item>
+        <item>20.212 Digital Design and Fabrication</item>
+        <item>20.213 Building Information Modeling</item>
+        <item>20.301 Material Computation: Advanced Topics in Geometry and Matter</item>
+        <item>20.302 Advanced Topics in Performative Design: Daylight and Electric Lighting</item>
+        <item>20.303 Urban Analysis</item>
+        <item>20.304 Urban Housing Typologies</item>
+        <item>20.305 Conservation Theories and Approaches of Built Heritage</item>
+        <item>20.306 Integrated Building Design</item>
+        <item>20.309 Sustainability of Ancient Chinese Architecture Design in the Modern World</item>
+        <item>20.311 Advanced Topics in Digital Design and Fabrication</item>
+        <item>20.312 Social Architecture: Theory and Practice</item>
+        <item>20.313 Advanced Topics in Performative Design: Urban Sustainability</item>
+        <item>20.314 Paradigms of Adaptation</item>
+        <item>20.201 Architectural Science and Technology</item>
+        <item>20.211 Introduction to Design Computation</item>
+    </string-array>
+
+    <string-array name="common_modules">
+        <item>01.400 Capstone 1</item>
+        <item>01.401 Capstone 2</item>
+    </string-array>
+
 </resources>

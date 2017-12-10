@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="username"/>
+
+            <EditText
+                android:id="@+id/studentID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="student ID"/>
+
+            <EditText
+                android:id="@+id/sutd_email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="SUTD email"/>
+
+            <EditText
+                android:id="@+id/student_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="140"
+                android:hint="About Me"/>
+
+            <EditText
+                android:id="@+id/student_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="default booking capacity preference"/>
+
+            <RadioGroup
+                android:id="@+id/student_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/freshmore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Freshmore"
+                    android:buttonTint="@color/colorPrimary"/>
+                <RadioButton
+                    android:id="@+id/ISTDpillar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ISTD"
+                    android:buttonTint="@color/colorPrimary"/>
+                <RadioButton
+                    android:id="@+id/EPDpillar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EPD"
+                    android:buttonTint="@color/colorPrimary"/>
+                <RadioButton
+                    android:id="@+id/ESDpillar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ESD"
+                    android:buttonTint="@color/colorPrimary"/>
+                <RadioButton
+                    android:id="@+id/ASDpillar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASD"
+                    android:buttonTint="@color/colorPrimary"/>
+            </RadioGroup>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/select_modules"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="select modules"/>
+
+            <Button
+                android:id="@+id/select_profs"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="select profesffors"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="register"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

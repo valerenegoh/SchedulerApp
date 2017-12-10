@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.androidapp1d.Prof.ProfFeedActivity;
-import com.example.androidapp1d.Stud.Booking.StudBookingApplication;
+import com.example.androidapp1d.Stud.Booking.StudRegistration;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginbutton;
@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent studentActivity = new Intent(LoginActivity.this, StudBookingApplication.class);
+                Intent studentActivity = new Intent(LoginActivity.this, StudRegistration.class);
                 startActivity(studentActivity);
             }
         });

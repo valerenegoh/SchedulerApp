@@ -119,23 +119,22 @@ public class StudBookingApplication extends AppCompatActivity {
 
             //choose flexible or default capacity
             chooseSize.setOnCheckedChangeListener(
-                    new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                            switch (checkedId) {
-                                case R.id.defaultSize:
-                                    Toast.makeText(StudBookingApplication.this, "Your default size: " + defaultCap + " seats", Toast.LENGTH_SHORT).show();
-                                    numSeats.setEnabled(false);
-                                    numSeats.setVisibility(View.INVISIBLE);
-                                    break;
-                                case R.id.flexibleSize:
-                                    numSeats.setEnabled(true);
-                                    numSeats.setVisibility(View.VISIBLE);
-                                    numSeats.requestFocus();
-                                    break;
-                            }
+                new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                        switch (checkedId) {
+                            case R.id.defaultSize:
+                                numSeats.setEnabled(false);
+                                numSeats.setVisibility(View.INVISIBLE);
+                                break;
+                            case R.id.flexibleSize:
+                                numSeats.setEnabled(true);
+                                numSeats.setVisibility(View.VISIBLE);
+                                numSeats.requestFocus();
+                                break;
                         }
-                    });
+                    }
+                });
 
             //get venue
             venueRef.addListenerForSingleValueEvent(new ValueEventListener() {
