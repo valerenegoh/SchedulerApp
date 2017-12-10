@@ -143,7 +143,7 @@ public class StudRegistration extends AppCompatActivity {
                                         if (selectedmodulesList.isEmpty()) {
                                             Toast.makeText(StudRegistration.this, "Please select some modules", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            //get profs under th selected mods
+                                            //get profs under the selected mods
                                             for (int i = 0; i < selectedmodulesList.size(); i++) {
                                                 replaced = selectedmodulesList.get(i).replaceAll("\\.", "\\'");
                                                 profRef.child(replaced).addListenerForSingleValueEvent(new ValueEventListener() {

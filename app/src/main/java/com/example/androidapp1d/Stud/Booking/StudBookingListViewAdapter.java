@@ -1,6 +1,7 @@
 package com.example.androidapp1d.Stud.Booking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,6 @@ import android.widget.Toast;
 
 import com.example.androidapp1d.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by ASUS on 12/8/2017.
  */
@@ -20,13 +19,13 @@ import java.util.ArrayList;
 public class StudBookingListViewAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> timeSlots;
-    ArrayList<Integer> colors;
-    ArrayList<String> availability;
-    ArrayList<String> bookingIDs;
+    String[] timeSlots;
+    Integer[] colors;
+    String[] availability;
+    String[] bookingIDs;
     private static LayoutInflater inflater = null;
 
-    public StudBookingListViewAdapter(Context context, ArrayList<String> timeSlots, ArrayList<Integer> colors, ArrayList<String> availability, ArrayList<String> bookingIDs) {
+    public StudBookingListViewAdapter(Context context, String[] timeSlots, Integer[] colors, String[] availability, String[] bookingIDs) {
         this.context = context;
         this.timeSlots = timeSlots;
         this.colors = colors;
@@ -37,7 +36,7 @@ public class StudBookingListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return colors.size();
+        return colors.length;
     }
 
     @Override
@@ -67,17 +66,18 @@ public class StudBookingListViewAdapter extends BaseAdapter {
         holder.availability = (TextView) rowView.findViewById(R.id.availability);
         holder.book = (Button) rowView.findViewById(R.id.bookButton);
 
-        holder.tile.setBackgroundResource(colors.get(position));
-        holder.timeSlot.setText(timeSlots.get(position));
-        holder.availability.setText(availability.get(position));
-        if(bookingIDs.get(position) != null){
-            holder.title.setText(bookingIDs.get(position));
-            if(availability.get(position).equals("Available")){
+        holder.tile.setBackgroundResource(colors[position]);
+        holder.timeSlot.setText(timeSlots[position]);
+        holder.availability.setText(availability[position]);
+        if(bookingIDs[position] != null){
+            holder.title.setText(bookingIDs[position]);
+            if(availability[position].equals("Available")){
                 holder.book.setText("Book");
                 holder.book.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, "Booking", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(context, StudBookingApplication.class);
+                        context.startActivity(i);
                     }
                 });
             } else{

@@ -30,29 +30,19 @@ public class StudBookingApplication extends AppCompatActivity {
 
     private static final String PROF = "uniqueID";
     private static final String TIME = "2:00PM-2:30PM";
-    private static final String CREATOR = "User1";
+    private static final String CREATOR = "Valerene Goh";
     private static final String DATE = "Friday, 8 December 2017";
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference capacityRef;
-    private DatabaseReference modulesRef;
-    private DatabaseReference venueRef;
-    private DatabaseReference addToPendingRef;
-    private DatabaseReference addtoCreatorRef;
-    private DatabaseReference addtoProfRef;
-
+    private DatabaseReference capacityRef, modulesRef, venueRef, addToPendingRef,
+            addtoCreatorRef, addtoProfRef, addtoModsRef;
     private EditText title, description, numSeats;
     private Spinner chooseModule;
     private RadioGroup chooseSize;
-    private String titleInput, descriptionInput;
-    private Integer numSeatsInput;
-    private Integer defaultCap;
-    private String chosenMod;
+    private String titleInput, descriptionInput, chosenMod, venue, key;
+    private Integer numSeatsInput, defaultCap;
     private ArrayList<String> mods = new ArrayList<String>(){{add("Choose module");}};
-    private String venue;
     private StudBookingCreateItem newbooking;
-    private Button apply;
-    private Button cancel;
-    private String key;
+    private Button apply, cancel;
     private TextView location;
 
     @Override
@@ -79,6 +69,7 @@ public class StudBookingApplication extends AppCompatActivity {
             addToPendingRef = firebaseDatabase.getReference().child("pendingBookings");
             addtoCreatorRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("allBookings");
             addtoProfRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("pendingBookings");
+            addtoModsRef = firebaseDatabase.getReference().child("Modules").child(chosenMod.replaceAll("\\.", "\\'")).child("Bookings");
 
             //get all mods of student
             modulesRef.addChildEventListener(new ChildEventListener() {
@@ -188,10 +179,10 @@ public class StudBookingApplication extends AppCompatActivity {
     public void addToDatabase(){
         newbooking = new StudBookingCreateItem(titleInput, descriptionInput, TIME, DATE,
                 chosenMod, PROF, numSeatsInput, CREATOR, venue);
-
         key = addToPendingRef.push().getKey();
         addToPendingRef.child(key).setValue(newbooking);
         addtoCreatorRef.push().setValue(key);
         addtoProfRef.push().setValue(key);
+        addtoModsRef.push().setValue(key);
     }
 }
