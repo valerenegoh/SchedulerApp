@@ -29,17 +29,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <include
-                        android:id="@+id/Upcoming"
+                        android:id="@+id/Future"
                         layout="@layout/stud_bookingupcoming"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"></include>
                     <include
-                        android:id="@+id/Previous"
+                        android:id="@+id/Past"
                         layout="@layout/stud_bookingprevious"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"></include>
                     <include
-                        android:id="@+id/Favourites"
+                        android:id="@+id/Favs"
+                        layout="@layout/stud_bookingfavourites"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"></include>
+                    <include
+                        android:id="@+id/Pending"
                         layout="@layout/stud_bookingfavourites"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"></include>

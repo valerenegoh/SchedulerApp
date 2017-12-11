@@ -1,5 +1,6 @@
 package com.example.androidapp1d.Stud.Booking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -28,17 +29,14 @@ import java.util.ArrayList;
 
 public class StudBookingApplication extends AppCompatActivity {
 
-    private static final String PROF = "uniqueID";
-    private static final String TIME = "2:00PM-2:30PM";
     private static final String CREATOR = "Valerene Goh";
-    private static final String DATE = "Friday, 8 December 2017";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference capacityRef, modulesRef, venueRef, addToPendingRef,
-            addtoCreatorRef, addtoProfRef, addtoModsRef;
+            addtoCreatorRef, addtoProfRef;
     private EditText title, description, numSeats;
     private Spinner chooseModule;
     private RadioGroup chooseSize;
-    private String titleInput, descriptionInput, chosenMod, venue, key;
+    private String titleInput, descriptionInput, chosenMod, venue, key, TIME, DATE, PROF;
     private Integer numSeatsInput, defaultCap;
     private ArrayList<String> mods = new ArrayList<String>(){{add("Choose module");}};
     private StudBookingCreateItem newbooking;
@@ -50,6 +48,11 @@ public class StudBookingApplication extends AppCompatActivity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.stud_bookingapplication);
+
+            Intent i = this.getIntent();
+            TIME = i.getStringExtra("time");
+            DATE = i.getStringExtra("date");
+            PROF = i.getStringExtra("prof");
 
             title = (EditText) findViewById(R.id.bookingTitleText);
             description = (EditText) findViewById(R.id.bookingDescriptionText);
@@ -67,9 +70,13 @@ public class StudBookingApplication extends AppCompatActivity {
             modulesRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("mods");
             venueRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("Preferences/venue");
             addToPendingRef = firebaseDatabase.getReference().child("pendingBookings");
-            addtoCreatorRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("allBookings");
+            addtoCreatorRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("pendingBookings");
             addtoProfRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("pendingBookings");
-            addtoModsRef = firebaseDatabase.getReference().child("Modules").child(chosenMod.replaceAll("\\.", "\\'")).child("Bookings");
+
+            //to generate dummy data, replace the last 3 above with these
+//            addToPendingRef = firebaseDatabase.getReference().child("Bookings");
+//            addtoCreatorRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("allBookings");
+//            addtoProfRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("allBookings");
 
             //get all mods of student
             modulesRef.addChildEventListener(new ChildEventListener() {
@@ -127,7 +134,7 @@ public class StudBookingApplication extends AppCompatActivity {
                     }
                 });
 
-            //get venue
+            //get venue set by prof
             venueRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -168,7 +175,9 @@ public class StudBookingApplication extends AppCompatActivity {
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: go to previous page
+                    //go to previous page
+                    Intent i = new Intent(StudBookingApplication.this, StudBookingProfSlot.class);
+                    startActivity(i);
                 }
             });
         } catch(Exception e){
@@ -183,6 +192,7 @@ public class StudBookingApplication extends AppCompatActivity {
         addToPendingRef.child(key).setValue(newbooking);
         addtoCreatorRef.push().setValue(key);
         addtoProfRef.push().setValue(key);
-        addtoModsRef.push().setValue(key);
+        Toast.makeText(this, "Booking applied", Toast.LENGTH_SHORT).show();
+        //TODO: redirect to feed/bookings page
     }
 }

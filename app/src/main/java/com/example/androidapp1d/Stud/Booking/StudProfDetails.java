@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
@@ -20,6 +21,11 @@ import com.example.androidapp1d.Stud.Feed.StudFeedActivity;
 import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
 import com.example.androidapp1d.Stud.StudNotificationActivity;
 import com.example.androidapp1d.Stud.StudSearchActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by ASUS on 12/7/2017.
@@ -31,6 +37,13 @@ public class StudProfDetails extends AppCompatActivity implements NavigationView
     private ActionBar actionBar;
     private NavigationView navigationView;
     private Button consult;
+    private FirebaseDatabase firebaseDatabase;
+    private DataSnapshot officehoursRef;
+    private DatabaseReference profRef;
+    private TextView pillaryear, biblio, modules, officeloc, officehours, email;
+    private String pillaryearS, biblioS, modulesS, officelocS, officehoursS = "", emailS;
+
+    private static final String profName = "Oka Kuniawaran";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +53,47 @@ public class StudProfDetails extends AppCompatActivity implements NavigationView
 
             getSupportActionBar().setTitle("");
 
+            //go to prof booking slot page
             consult = (Button) findViewById(R.id.consultButton);
             consult.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(StudProfDetails.this, StudBookingProfSlot.class);
+                    i.putExtra("profName", profName);
                     startActivity(i);
                 }
             });
 
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            profRef = firebaseDatabase.getReference().child("Professors").child(profName);
+
+            //get details about prof
+            profRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    pillaryearS = dataSnapshot.child("year").getValue(String.class);
+                    biblioS = dataSnapshot.child("description").getValue(String.class);
+                    modulesS = dataSnapshot.child("mods").getValue(String.class);
+                    emailS = dataSnapshot.child("email").getValue(String.class);
+                    officelocS = dataSnapshot.child("office").getValue(String.class);
+                    officehoursRef = dataSnapshot.child("Preferences").child("availability");
+                    for(DataSnapshot day: officehoursRef.getChildren()){
+                        officehoursS += day.getKey() + " ";
+                        for(DataSnapshot time: day.getChildren()){
+                            officehoursS += time.getValue(String.class) + " ";
+                        }
+                        officehoursS += "\n";
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+
+            pillaryear = (TextView) findViewById(R.id.profPillar);
+
+
+            
             //=============================================================================
 
             drawerLayout =(DrawerLayout)findViewById(R.id.drawerLayout);

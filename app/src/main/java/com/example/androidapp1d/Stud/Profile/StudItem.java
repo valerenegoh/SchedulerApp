@@ -1,4 +1,4 @@
-package com.example.androidapp1d.Stud.Booking;
+package com.example.androidapp1d.Stud.Profile;
 
 import java.util.ArrayList;
 

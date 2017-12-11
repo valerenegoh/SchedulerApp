@@ -23,10 +23,13 @@ public class StudBookingListViewAdapter extends BaseAdapter {
     Integer[] colors;
     String[] availability;
     String[] bookingIDs;
+    String profName, Date;
     private static LayoutInflater inflater = null;
 
-    public StudBookingListViewAdapter(Context context, String[] timeSlots, Integer[] colors, String[] availability, String[] bookingIDs) {
+    public StudBookingListViewAdapter(Context context, String profName, String Date, String[] timeSlots, Integer[] colors, String[] availability, String[] bookingIDs) {
         this.context = context;
+        this.profName = profName;
+        this.Date = Date;
         this.timeSlots = timeSlots;
         this.colors = colors;
         this.availability = availability;
@@ -53,11 +56,12 @@ public class StudBookingListViewAdapter extends BaseAdapter {
         View tile;
         TextView title, timeSlot, availability;
         Button book;
+
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        Holder holder=new Holder();
+        Holder holder = new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.stud_bookingcustomslot, null);
         holder.tile = (View) rowView.findViewById(R.id.availabilityIndicator);
@@ -77,6 +81,9 @@ public class StudBookingListViewAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(context, StudBookingApplication.class);
+                        i.putExtra("time", timeSlots[position]);
+                        i.putExtra("date", Date);
+                        i.putExtra("prof", profName);
                         context.startActivity(i);
                     }
                 });

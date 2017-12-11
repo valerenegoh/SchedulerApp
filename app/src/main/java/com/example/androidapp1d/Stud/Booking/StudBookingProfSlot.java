@@ -38,7 +38,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
     CalendarView calendarView;
     TextView dateView;
     ListView lv;
-    private static final String KEY = "Oka Kuniawaran";
+    private static final String PROF = "Oka Kuniawaran";
     private int slotSize = 30;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference queryProfAvailabilityRef, queryProfBookingsRef,
@@ -70,8 +70,8 @@ public class StudBookingProfSlot extends AppCompatActivity{
             lv = (ListView) findViewById(R.id.all_slots);
 
             firebaseDatabase = FirebaseDatabase.getInstance();
-            queryProfAvailabilityRef = firebaseDatabase.getReference().child("Professors").child(KEY).child("Preferences").child("availability");
-            queryProfBookingsRef = firebaseDatabase.getReference().child("Professors").child(KEY).child("allBookings");
+            queryProfAvailabilityRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("Preferences").child("availability");
+            queryProfBookingsRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("allBookings");
             queryProfBookingsTimeRef = firebaseDatabase.getReference().child("Bookings");  //look under every booking of the prof with the specified timing
             queryProfDateRef = firebaseDatabase.getReference().child("Bookings");
 
@@ -191,7 +191,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
                 public void onClick(View v) {
                 try {
                     if(timeArray.isEmpty()){
-                        Toast.makeText(StudBookingProfSlot.this, "Prof " + KEY + " has no available time slots for that day", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudBookingProfSlot.this, "Prof " + PROF + " has no available time slots for that day", Toast.LENGTH_SHORT).show();
                     }
                     colors = new Integer[orderedTimeArray.size()];
                     bookingTitles = new String[orderedTimeArray.size()];
@@ -211,7 +211,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
                             availabilityStatus[i] = slotsLeft + " Slots Available";
                         }
                     }
-                    lv.setAdapter(new StudBookingListViewAdapter(StudBookingProfSlot.this,
+                    lv.setAdapter(new StudBookingListViewAdapter(StudBookingProfSlot.this, PROF, formattedDate,
                             orderedTimeArray.toArray(new String[orderedTimeArray.size()]), colors, availabilityStatus, bookingTitles));
                 } catch (Exception e){
                     Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.androidapp1d.Stud.Booking;
+package com.example.androidapp1d.Stud.Profile;
 
 
 import android.content.DialogInterface;
@@ -29,8 +29,7 @@ public class StudRegistration extends AppCompatActivity {
     private EditText username, email, studentID, aboutme, capacity;
     private RadioGroup year;
     private Button modulesButton, profsButton, register;
-    private String usernameInput, emailInput, studentIDInput, aboutmeInput, yearInput;
-    private Integer capacityInput;
+    private String usernameInput, emailInput, studentIDInput, aboutmeInput, yearInput, capacityInput;
     private String[] modulesListItems, profsListItems;
     private boolean[] checkedModules, checkedProfs;
     private ArrayList<String> selectedmodulesList = new ArrayList<>();
@@ -39,7 +38,6 @@ public class StudRegistration extends AppCompatActivity {
     private AlertDialog.Builder modsbuilder, profsbuilder;
     private FirebaseDatabase database;
     private DatabaseReference profRef, studentRef;
-    private String replaced;
     private StudItem studItem;
 
     @Override
@@ -59,27 +57,31 @@ public class StudRegistration extends AppCompatActivity {
             register = (Button) findViewById(R.id.register);
 
             database = FirebaseDatabase.getInstance();
-            profRef = database.getReference().child("Modules");
+            profRef = database.getReference().child("Professors");
             studentRef = database.getReference().child("Students");
 
-            //register
+            //register button
             register.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    usernameInput = username.getText().toString().trim();
-                    emailInput = email.getText().toString().trim();
-                    studentIDInput = studentID.getText().toString().trim();
-                    aboutmeInput = aboutme.getText().toString().trim();
-                    capacityInput = Integer.parseInt(capacity.getText().toString().trim());
-                    if (usernameInput.trim().isEmpty() || emailInput.isEmpty() || aboutmeInput.isEmpty() ||
-                            capacity.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(StudRegistration.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                    } else if (selectedmodulesList.isEmpty() || selectedProfList.isEmpty()) {
-                        Toast.makeText(StudRegistration.this, "Please select your modules", Toast.LENGTH_SHORT).show();
-                    } else {
-                        studItem = new StudItem(yearInput, aboutmeInput, emailInput, studentIDInput,
-                                capacityInput, selectedProfList, selectedmodulesList);
-                        studentRef.child(usernameInput).setValue(studItem);
+                    try {
+                        usernameInput = username.getText().toString().trim();
+                        emailInput = email.getText().toString().trim();
+                        studentIDInput = studentID.getText().toString().trim();
+                        aboutmeInput = aboutme.getText().toString().trim();
+                        capacityInput = capacity.getText().toString().trim();
+                        if (usernameInput.trim().isEmpty() || emailInput.isEmpty() || aboutmeInput.isEmpty() ||
+                                capacity.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(StudRegistration.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                        } else if (selectedmodulesList.isEmpty() || selectedProfList.isEmpty()) {
+                            Toast.makeText(StudRegistration.this, "Please select your modules", Toast.LENGTH_SHORT).show();
+                        } else {
+                            studItem = new StudItem(yearInput, aboutmeInput, emailInput, studentIDInput,
+                                    Integer.parseInt(capacityInput), selectedProfList, selectedmodulesList);
+                            studentRef.child(usernameInput).setValue(studItem);
+                        }
+                    } catch (Exception e){
+                        Toast.makeText(StudRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -124,58 +126,67 @@ public class StudRegistration extends AppCompatActivity {
                         checkedModules = new boolean[modulesListItems.length];
                         modsbuilder = new AlertDialog.Builder(StudRegistration.this);
                         modsbuilder.setTitle("Select some modules that you consult often about")
-                                .setMultiChoiceItems(modulesListItems, checkedModules, new DialogInterface.OnMultiChoiceClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                        if (isChecked) {
-                                            if (!selectedmodulesList.contains(modulesListItems[which])){
-                                                selectedmodulesList.add(modulesListItems[which]);
-                                            }
-                                        } else {
-                                            selectedmodulesList.remove(modulesListItems[which]);
+                            .setMultiChoiceItems(modulesListItems, checkedModules, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                                    if (isChecked) {
+                                        if (!selectedmodulesList.contains(modulesListItems[which])){
+                                            selectedmodulesList.add(modulesListItems[which]);
                                         }
+                                    } else {
+                                        selectedmodulesList.remove(modulesListItems[which]);
                                     }
-                                })
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (selectedmodulesList.isEmpty()) {
-                                            Toast.makeText(StudRegistration.this, "Please select some modules", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            //get profs under the selected mods
-                                            for (int i = 0; i < selectedmodulesList.size(); i++) {
-                                                replaced = selectedmodulesList.get(i).replaceAll("\\.", "\\'");
-                                                profRef.child(replaced).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                }
+                            })
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (selectedmodulesList.isEmpty()) {
+                                        Toast.makeText(StudRegistration.this, "Please select some modules", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        //get profs under the selected mods
+                                        for (int i = 0; i < selectedmodulesList.size(); i++) {
+                                            profRef.orderByChild("mods").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    try {
                                                         for (DataSnapshot profs : dataSnapshot.getChildren()) {
-                                                            if (!profsList.contains(profs.getValue(String.class))) {
-                                                                profsList.add(profs.getValue(String.class));
+                                                            for (int i = 0; i < selectedmodulesList.size(); i++) {
+                                                                for(DataSnapshot mod: profs.child("mods").getChildren()){
+                                                                    if(mod.getValue(String.class).equals(selectedmodulesList.get(i))){
+                                                                        if(!profsList.contains(profs.getKey())){
+                                                                            profsList.add(profs.getKey());
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
+                                                    } catch(Exception e){
+                                                        Toast.makeText(StudRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
-                                                    @Override
-                                                    public void onCancelled(DatabaseError databaseError) {
-                                                    }
-                                                });
-                                            }
-                                            Toast.makeText(StudRegistration.this, "modules selected: \n"
-                                                    + selectedmodulesList.toString(), Toast.LENGTH_LONG).show();
-                                            dialog.dismiss();
+                                                }
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                }
+                                            });
                                         }
-                                    }
-                                })
-                                .setNegativeButton("CLEAR ALL", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        for (int i = 0; i < checkedModules.length; i++) {
-                                            checkedModules[i] = false;
-                                            selectedmodulesList.clear();
-                                        }
+                                        Toast.makeText(StudRegistration.this, "modules selected: \n"
+                                                + selectedmodulesList.toString(), Toast.LENGTH_LONG).show();
                                         dialog.dismiss();
                                     }
-                                });
+                                }
+                            })
+                            .setNegativeButton("CLEAR ALL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    for (int i = 0; i < checkedModules.length; i++) {
+                                        checkedModules[i] = false;
+                                        selectedmodulesList.clear();
+                                    }
+                                    dialog.dismiss();
+                                }
+                            });
                         modsbuilder.create().show();
                     }
                 }
@@ -184,7 +195,9 @@ public class StudRegistration extends AppCompatActivity {
             profsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (profsList.isEmpty()) {
+                    if(selectedmodulesList.isEmpty()){
+                        Toast.makeText(StudRegistration.this, "Please select your modules first", Toast.LENGTH_SHORT).show();
+                    } else if (profsList.isEmpty()) {
                         Toast.makeText(StudRegistration.this, "There are no professors registered under any of the modules you have selected", Toast.LENGTH_SHORT).show();
                     } else {
                         checkedProfs = new boolean[profsList.size()];

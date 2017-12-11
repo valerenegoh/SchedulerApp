@@ -9,32 +9,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
 import com.example.androidapp1d.Stud.Booking.StudBookingActivity;
-import com.example.androidapp1d.Stud.Booking.StudBookingItem;
-import com.example.androidapp1d.Stud.StudNotificationActivity;
-import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
-import com.example.androidapp1d.Stud.StudSearchActivity;
 import com.example.androidapp1d.Stud.Booking.StudnewBookingActivity;
+import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
+import com.example.androidapp1d.Stud.StudNotificationActivity;
+import com.example.androidapp1d.Stud.StudSearchActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StudFeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -57,35 +47,35 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
 
             getSupportActionBar().setTitle("Feed");
 
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            allBookingsDatabaseReference = firebaseDatabase.getReference().child("Bookings");
-            Toast.makeText(this, "there are bookings", Toast.LENGTH_SHORT).show();
-
-            upcomingBookingsQuery = allBookingsDatabaseReference.orderByChild("timestamp").startAt(new Date().getTime());
-            upcomingBookingsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Toast.makeText(StudFeedActivity.this, "There are " +
-                            dataSnapshot.getChildrenCount() + " upcomingBookings", Toast.LENGTH_SHORT).show();
-                    Map<String, Integer> td = (HashMap<String, Integer>) dataSnapshot.getValue();
-                    rawUpcomingBookings = new ArrayList<Integer>(td.values());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-
-            ArrayList<StudBookingItem> upcomingBookingItems = getBookingItems(rawUpcomingBookings);
-
-            RecyclerView rv1 = (RecyclerView) findViewById(R.id.recyclerviewUpcoming);
-            rv1.setLayoutManager(new LinearLayoutManager(this));
-            rv1.setItemAnimator(new DefaultItemAnimator());
-
-            if (rawUpcomingBookings != null) {
-                final StudFeedDetailsAdapter adapter = new StudFeedDetailsAdapter(this, upcomingBookingItems);
-                rv1.setAdapter(adapter);
-            }
+//            firebaseDatabase = FirebaseDatabase.getInstance();
+//            allBookingsDatabaseReference = firebaseDatabase.getReference().child("Bookings");
+//            Toast.makeText(this, "there are bookings", Toast.LENGTH_SHORT).show();
+//
+//            upcomingBookingsQuery = allBookingsDatabaseReference.orderByChild("timestamp").startAt(new Date().getTime());
+//            upcomingBookingsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    Toast.makeText(StudFeedActivity.this, "There are " +
+//                            dataSnapshot.getChildrenCount() + " upcomingBookings", Toast.LENGTH_SHORT).show();
+//                    Map<String, Integer> td = (HashMap<String, Integer>) dataSnapshot.getValue();
+//                    rawUpcomingBookings = new ArrayList<String>(td.values());
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                }
+//            });
+//
+//            ArrayList<StudBookingItem> upcomingBookingItems = getBookingItems(rawUpcomingBookings);
+//
+//            RecyclerView rv1 = (RecyclerView) findViewById(R.id.recyclerviewUpcoming);
+//            rv1.setLayoutManager(new LinearLayoutManager(this));
+//            rv1.setItemAnimator(new DefaultItemAnimator());
+//
+//            if (rawUpcomingBookings != null) {
+//                final StudFeedDetailsAdapter adapter = new StudFeedDetailsAdapter(this, upcomingBookingItems);
+//                rv1.setAdapter(adapter);
+//            }
 
             //=============================================================================
 
@@ -154,16 +144,15 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
-    public ArrayList<StudBookingItem> getBookingItems(ArrayList<Integer> rawBookingItems){
-        ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
-        for (int i = 0; i < rawBookingItems.size(); i++) {
-            StudBookingItem bookingItem = new StudBookingItem(rawBookingItems.get(i));
-            bookingItems.add(bookingItem);
-        }
-        return bookingItems;
-    }
-
+//
+//    public ArrayList<StudBookingItem> getBookingItems(ArrayList<String> rawBookingItems){
+//        ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
+//        for (int i = 0; i < rawBookingItems.size(); i++) {
+//            StudBookingItem bookingItem = new StudBookingItem(context, rawBookingItems.get(i));
+//            bookingItems.add(bookingItem);
+//        }
+//        return bookingItems;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

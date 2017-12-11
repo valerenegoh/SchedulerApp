@@ -53,8 +53,11 @@ public class randomTest {
 //        LocalTime localendTime = LocalTime.parse(endTime, dtf2);
 //        System.out.println(printTimeSlots(localstartTime, localendTime, 30).toString());
 
-        boolean mBool = true;
-        System.out.println(mBool == true);
+//        boolean mBool = true;
+//        System.out.println(mBool == true);
+
+        //Test 5
+        long timestamp = System.currentTimeMillis() / 1000;
     }
     public static ArrayList<String> printTimeSlots(LocalTime startTime, LocalTime endTime, int slotSizeInMinutes) {
         ArrayList<String> timeArray = new ArrayList<>();
