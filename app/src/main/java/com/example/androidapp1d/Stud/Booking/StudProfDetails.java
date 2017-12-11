@@ -40,7 +40,7 @@ public class StudProfDetails extends AppCompatActivity implements NavigationView
     private FirebaseDatabase firebaseDatabase;
     private DataSnapshot officehoursRef;
     private DatabaseReference profRef;
-    private TextView pillaryear, biblio, modules, officeloc, officehours, email;
+    private TextView name, pillaryear, biblio, modules, officeloc, officehours, email;
     private String pillaryearS, biblioS, modulesS, officelocS, officehoursS = "", emailS;
 
     private static final String profName = "Oka Kuniawaran";
@@ -90,9 +90,21 @@ public class StudProfDetails extends AppCompatActivity implements NavigationView
                 }
             });
 
+            name = (TextView) findViewById(R.id.display_name);
             pillaryear = (TextView) findViewById(R.id.profPillar);
+            biblio = (TextView) findViewById(R.id.bibliography_details);
+            modules = (TextView) findViewById(R.id.modules_taught_details);
+            officeloc = (TextView) findViewById(R.id.office_location_details);
+            officehours = (TextView) findViewById(R.id.office_hours_details);
+            email = (TextView) findViewById(R.id.email_details);
 
-
+            name.setText(profName);
+            pillaryear.setText(pillaryearS);
+            biblio.setText(biblioS);
+            modules.setText(modulesS);
+            officeloc.setText(officelocS);
+            officehours.setText(officehoursS);
+            email.setText(emailS);
             
             //=============================================================================
 

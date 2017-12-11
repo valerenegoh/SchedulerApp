@@ -47,7 +47,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
     private StudBookingDetailsAdapter adapter = null;
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference referredBookingsRef, referredPendingBookingRef, allBookingsRef, favRef, pendingRef;
+    private DatabaseReference referredBookingsRef, allBookingsRef, favRef, pendingRef;
     private ArrayList<String> rawBookings = new ArrayList<>();
     private ArrayList<String> rawUpcomingBookings = new ArrayList<>();
     private ArrayList<String> rawPreviousBookings = new ArrayList<>();
@@ -90,6 +90,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         pendingTab.setContent(R.id.Pending);
         tabHost.addTab(pendingTab);
 
+        //fab button
         addBooking = (FloatingActionButton) findViewById(R.id.addBookingsButton);
         addBooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +103,6 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         //fetch booking details (by instantiation id) from firebase & store its details in ArrayList
         firebaseDatabase = FirebaseDatabase.getInstance();
         referredBookingsRef = firebaseDatabase.getReference().child("Bookings");
-        referredPendingBookingRef = firebaseDatabase.getReference().child("pendingBookings");
         allBookingsRef = firebaseDatabase.getReference().child("Students").child(KEY).child("allBookings");
         favRef =  firebaseDatabase.getReference().child("Students").child(KEY).child("favBookings");
         pendingRef =  firebaseDatabase.getReference().child("Students").child(KEY).child("pendingBookings");
@@ -117,13 +117,6 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-        //fab button
-        addBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
             }
         });
 
@@ -148,49 +141,18 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         rv3.setItemAnimator(new DefaultItemAnimator());
         searchFavs = (SearchView) findViewById(R.id.searchFavourites);
 
-        favRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
-                    rawFavouriteBookings.add(aBooking.getValue(String.class));
-                }
-                if (rawFavouriteBookings == null) {
-                    Toast.makeText(context, "No favourite booking items", Toast.LENGTH_SHORT).show();
-                } else {
-                    favouriteBookingItems = getBookingItems(rawFavouriteBookings);
-                    adapter = new StudBookingDetailsAdapter(context, favouriteBookingItems);
-                }
-                try {
-                    //TODO: think of another work around the asynchronousity. progress bar?
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                displayFavourites();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-            //================================PENDING TAB================================
-
-            rv4 = (RecyclerView) findViewById(R.id.recyclerviewPending);
-            rv4.setLayoutManager(new LinearLayoutManager(this));
-            rv4.setItemAnimator(new DefaultItemAnimator());
-            searchFavs = (SearchView) findViewById(R.id.searchPending);
-
-            pendingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        try {
+            favRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
-                        rawPendingBookings.add(aBooking.getValue(String.class));
+                    for (DataSnapshot aBooking : dataSnapshot.getChildren()) {
+                        rawFavouriteBookings.add(aBooking.getValue(String.class));
                     }
-                    if (rawPendingBookings == null) {
+                    if (rawFavouriteBookings == null) {
                         Toast.makeText(context, "No favourite booking items", Toast.LENGTH_SHORT).show();
                     } else {
-                        pendingBookingsItems = getBookingItems(rawPendingBookings);
-                        adapter = new StudBookingDetailsAdapter(context, pendingBookingsItems);
+                        favouriteBookingItems = getBookingItems(rawFavouriteBookings, false);
+                        adapter = new StudBookingDetailsAdapter(context, favouriteBookingItems);
                     }
                     try {
                         //TODO: think of another work around the asynchronousity. progress bar?
@@ -198,12 +160,48 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    displayPending();
+                    displayFavourites();
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
             });
+        } catch(Exception e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        //================================PENDING TAB================================
+
+        rv4 = (RecyclerView) findViewById(R.id.recyclerviewPending);
+        rv4.setLayoutManager(new LinearLayoutManager(this));
+        rv4.setItemAnimator(new DefaultItemAnimator());
+        searchPending = (SearchView) findViewById(R.id.searchPending);
+
+        pendingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
+                    rawPendingBookings.add(aBooking.getValue(String.class));
+                }
+                if (rawPendingBookings == null) {
+                    Toast.makeText(context, "No pending booking items", Toast.LENGTH_SHORT).show();
+                } else {
+                    pendingBookingsItems = getBookingItems(rawPendingBookings, true);
+                    adapter = new StudBookingDetailsAdapter(context, pendingBookingsItems);
+                }
+                try {
+                    //TODO: think of another work around the asynchronousity. progress bar?
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                displayPending();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         //=============================================================================
 
@@ -295,7 +293,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                 if (rawUpcomingBookings == null) {
                     Toast.makeText(context, "No upcoming booking items", Toast.LENGTH_SHORT).show();
                 } else {
-                    upcomingBookingItems = getBookingItems(rawUpcomingBookings);
+                    upcomingBookingItems = getBookingItems(rawUpcomingBookings, false);
                     adapter = new StudBookingDetailsAdapter(context, upcomingBookingItems);
                 }
                 try {
@@ -310,7 +308,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                 if (rawPreviousBookings == null) {
                     Toast.makeText(context, "No previous booking items", Toast.LENGTH_SHORT).show();
                 } else {
-                    previousBookingItems = getBookingItems(rawPreviousBookings);
+                    previousBookingItems = getBookingItems(rawPreviousBookings, false);
                     adapter = new StudBookingDetailsAdapter(context, previousBookingItems);
                 }
                 try {
@@ -407,10 +405,10 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    public ArrayList<StudBookingItem> getBookingItems(ArrayList<String> rawBookingItems){
+    public ArrayList<StudBookingItem> getBookingItems(ArrayList<String> rawBookingItems, boolean isPending){
         ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
         for (int i = 0; i < rawBookingItems.size(); i++) {
-            StudBookingItem bookingItem = new StudBookingItem(context, rawBookingItems.get(i));
+            StudBookingItem bookingItem = new StudBookingItem(context, rawBookingItems.get(i), isPending);
             bookingItems.add(bookingItem);
         }
         return bookingItems;
