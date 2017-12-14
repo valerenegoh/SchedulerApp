@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
-import com.google.firebase.database.ChildEventListener;
+import com.example.androidapp1d.Stud.Feed.StudFeedActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,14 +29,13 @@ import java.util.ArrayList;
 
 public class StudBookingApplication extends AppCompatActivity {
 
-    private static final String CREATOR = "Valerene Goh";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference capacityRef, modulesRef, venueRef, addToPendingRef,
             addtoCreatorRef, addtoProfRef;
     private EditText title, description, numSeats;
     private Spinner chooseModule;
     private RadioGroup chooseSize;
-    private String titleInput, descriptionInput, chosenMod, venue, key, TIME, DATE, PROF;
+    private String titleInput, descriptionInput, chosenMod, venue, key, TIME, DATE, PROF, CREATOR;
     private Integer numSeatsInput, defaultCap;
     private ArrayList<String> mods = new ArrayList<String>(){{add("Choose module");}};
     private StudBookingCreateItem newbooking;
@@ -50,9 +49,14 @@ public class StudBookingApplication extends AppCompatActivity {
             setContentView(R.layout.stud_bookingapplication);
 
             Intent i = this.getIntent();
+            CREATOR = i.getStringExtra("creator");
             TIME = i.getStringExtra("time");
             DATE = i.getStringExtra("date");
             PROF = i.getStringExtra("prof");
+
+            //for testing purposes
+//            TIME = "9:00PM-9:30PM";
+//            DATE = "Tuesday, 12 December 2017";
 
             title = (EditText) findViewById(R.id.bookingTitleText);
             description = (EditText) findViewById(R.id.bookingDescriptionText);
@@ -79,19 +83,12 @@ public class StudBookingApplication extends AppCompatActivity {
 //            addtoProfRef = firebaseDatabase.getReference().child("Professors").child(PROF).child("allBookings");
 
             //get all mods of student
-            modulesRef.addChildEventListener(new ChildEventListener() {
+            modulesRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    mods.add(dataSnapshot.getValue(String.class));
-                }
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot aMod: dataSnapshot.getChildren()){
+                        mods.add(aMod.getValue(String.class));
+                    }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -193,6 +190,7 @@ public class StudBookingApplication extends AppCompatActivity {
         addtoCreatorRef.push().setValue(key);
         addtoProfRef.push().setValue(key);
         Toast.makeText(this, "Booking applied", Toast.LENGTH_SHORT).show();
-        //TODO: redirect to feed/bookings page
+        Intent i = new Intent(StudBookingApplication.this, StudFeedActivity.class);
+        i.putExtra("creator", CREATOR);
     }
 }

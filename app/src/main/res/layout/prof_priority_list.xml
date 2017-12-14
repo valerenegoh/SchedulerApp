@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.androidapp1d.Prof.ProfPriorityListPage"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/slotpriority"
+        android:layout_width="288dp"
+        android:layout_height="22dp"
+        android:fontFamily="sans-serif"
+        android:text="Slot Priority:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="5dp"
+            android:checked="false"
+            android:text="First come first served"
+            app:buttonTint="@color/endblue" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:checked="false"
+            android:text="Topic of the week"
+            app:buttonTint="@color/endblue" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:checked="false"
+            android:text="Project enquiries"
+            app:buttonTint="@color/endblue" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:checked="false"
+            android:text="Topic for upcoming test"
+            app:buttonTint="@color/endblue" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/rejectstudents"
+        android:layout_width="288dp"
+        android:layout_height="22dp"
+        android:fontFamily="sans-serif"
+        android:text="Automatically reject students when:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="5dp"
+        android:text="Student books more than 3 slots in the same week"
+        app:buttonTint="@color/endblue"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Attendance less than 5"
+        app:buttonTint="@color/endblue"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Slot does not meet slot priority"
+        app:buttonTint="@color/endblue"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:fontFamily="sans-serif"
+            android:text="Default Location:"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp" />
+
+        <EditText
+            android:layout_width="230dp"
+            android:layout_height="43dp"
+            android:fontFamily="sans-serif"
+            android:hint="Enter a location"
+            android:inputType="text"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"/>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:checked="false"
+            android:text="Upgrade location if room capacity is exceed"
+            app:buttonTint="@color/endblue" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:checked="false"
+            android:text="Reject automatically if room capacity is exceeded"
+            app:buttonTint="@color/endblue" />
+
+    </RadioGroup>
+
+
+</LinearLayout>

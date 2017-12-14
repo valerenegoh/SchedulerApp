@@ -8,14 +8,18 @@ import java.util.ArrayList;
 
 public class StudItem {
 
-    private String year, description, email, studentID;
+    private String year, description, email, studentID, password;
     private Integer capacityPreference;
     private ArrayList<String> favProfs = new ArrayList<>();
     private ArrayList<String> mods = new ArrayList<>();
 
-    public StudItem(String year, String description, String email,
+    public StudItem() {
+    }
+
+    public StudItem(String password, String year, String description, String email,
                     String studentID, Integer capacityPreference,
                     ArrayList<String> favProfs, ArrayList<String> mods) {
+        this.password = password;
         this.year = year;
         this.description = description;
         this.email = email;
@@ -79,5 +83,13 @@ public class StudItem {
 
     public void setMods(ArrayList<String> mods) {
         this.mods = mods;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

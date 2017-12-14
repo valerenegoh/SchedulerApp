@@ -3,4 +3,291 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/bibliography"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/info"></ImageView>
+
+                <TextView
+                    android:id="@+id/description_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/bibliography"
+                    android:textStyle="bold"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="10dp"
+                    android:text="Description" />
+
+                <TextView
+                    android:id="@+id/description_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/bibliography"
+                    android:layout_below="@id/description_title"
+                    android:text="lorem ipsum"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/modules_taught"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/modules"></ImageView>
+
+                <TextView
+                    android:id="@+id/modules_taught_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/modules_taught"
+                    android:textStyle="bold"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="10dp"
+                    android:text="Module" />
+
+                <TextView
+                    android:id="@+id/modules_taught_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/modules_taught"
+                    android:layout_below="@id/modules_taught_title"
+                    android:text="10.009 Digital World"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/contact_details_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:textStyle="bold"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="10dp"
+                    android:text="About" />
+
+                <ImageView
+                    android:id="@+id/office_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/contact_details_title"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/time"></ImageView>
+
+                <TextView
+                    android:id="@+id/office_hours_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/office_hours"
+                    android:layout_below="@id/contact_details_title"
+                    android:paddingTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Date and Time:" />
+
+                <TextView
+                    android:id="@+id/date_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/office_hours"
+                    android:layout_below="@id/office_hours_title"
+                    android:text="Wednesday, 24 June 2017" />
+                <TextView
+                    android:id="@+id/time_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/office_hours"
+                    android:layout_below="@id/date_details"
+                    android:text="3.30PM-4:00PM"
+                    android:paddingBottom="10dp"/>
+
+                <ImageView
+                    android:id="@+id/office_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/time_details"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/location"></ImageView>
+
+                <TextView
+                    android:id="@+id/office_location_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/office_hours"
+                    android:layout_below="@id/time_details"
+                    android:paddingTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Location:" />
+
+                <TextView
+                    android:id="@+id/office_location_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/office_location"
+                    android:layout_below="@id/office_location_title"
+                    android:text="1.502.27"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/People_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:textStyle="bold"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="10dp"
+                    android:text="People"/>
+
+               <ImageView
+                   android:id="@+id/prof"
+                   android:layout_width="wrap_content"
+                   android:layout_height="30dp"
+                   android:layout_alignParentLeft="true"
+                   android:layout_below="@id/People_title"
+                   android:layout_marginLeft="20dp"
+                   android:src="@drawable/person"/>
+
+                <TextView
+                    android:id="@+id/prof_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/prof"
+                    android:layout_below="@id/People_title"
+                    android:paddingTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Professor:" />
+
+                <TextView
+                    android:id="@+id/prof_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/prof"
+                    android:layout_below="@id/prof_title"
+                    android:text="Oka Kurniawan"
+                    android:paddingBottom="10dp"/>
+
+                <ImageView
+                    android:id="@+id/avail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/prof_details"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/friends"></ImageView>
+
+                <TextView
+                    android:id="@+id/avail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/avail"
+                    android:layout_below="@id/prof_details"
+                    android:paddingTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Space Availability:" />
+
+                <TextView
+                    android:id="@+id/avail_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/avail"
+                    android:layout_below="@id/avail_title"
+                    android:text="4 seats left"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/crashButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="crash"
+                    android:layout_alignParentRight="true"
+                    android:background="@null" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width = "match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

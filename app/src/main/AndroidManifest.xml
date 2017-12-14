@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".Stud.Feed.StudFeedActivity" />
         <activity
-            android:name=".Stud.StudNotificationActivity"
+            android:name=".Stud.Feed.StudNotificationActivity"
             android:parentActivityName=".Stud.Feed.StudFeedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -28,31 +28,44 @@
         </activity>
         <activity android:name=".Stud.Booking.StudBookingActivity"></activity>
         <activity android:name=".Stud.Profile.StudProfileActivity"></activity>
-        <activity android:name=".Prof.ProfFeedActivity"></activity>
+        <activity android:name=".Prof.Feed.ProfFeedActivity"></activity>
         <activity android:name=".Stud.StudSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
 
-        <activity android:name=".Stud.Booking.StudnewBookingActivity"></activity>
-        <activity android:name=".Stud.Booking.StudBookingProf"></activity>
-        <activity android:name=".Stud.Booking.StudBookingMod"></activity>
+
+        <activity android:name=".Stud.Profile.StudeditProfModActivity"></activity>
+        <activity android:name=".Stud.Profile.StudBookingProf"></activity>
+        <activity android:name=".Stud.Profile.StudBookingMod"></activity>
         <activity android:name=".Stud.Booking.StudBookingUpcoming"></activity>
         <activity android:name=".Stud.Booking.StudBookingPrevious"></activity>
         <activity android:name=".Stud.Booking.StudBookingFavourites"></activity>
+        <activity android:name=".Stud.Booking.StudBookingPending"></activity>
         <activity android:name=".Stud.Booking.StudProfDetails"></activity>
         <activity android:name=".Stud.Booking.StudBookingProfSlot"></activity>
         <activity android:name=".Stud.Booking.StudBookingApplication"></activity>
+        <activity android:name=".Stud.Booking.StudnewBookingActivity"></activity>
         <activity android:name=".Stud.Booking.StudBookingDetails"></activity>
         <activity android:name=".Stud.Booking.StudBookingDetailsDetails"></activity>
         <activity android:name=".Stud.Booking.StudBookingDetailsMembers"></activity>
         <activity android:name=".Stud.Booking.StudBookingDetailsComments"></activity>
         <activity android:name=".Stud.Profile.StudRegistration"></activity>
+        <activity android:name=".Stud.Profile.StudallMods"></activity>
+        <activity android:name=".Stud.Profile.StudallProfs"></activity>
+        <activity android:name=".Stud.Profile.StudPersonalDetails"></activity>
+        <activity android:name=".Stud.Profile.StudFriends"></activity>
+        <activity android:name=".Stud.Profile.StudChangePW"></activity>
 
-        <activity android:name=".Prof.ProfBookingActivity" />
-        <activity android:name=".Prof.ProfNotificationActivity" />
-        <activity android:name=".Prof.ProfProfileActivity" />
+
+        <activity android:name=".Prof.Booking.ProfBookingActivity" />
+        <activity android:name=".Prof.Feed.ProfNotificationActivity" />
+        <activity android:name=".Prof.Profile.ProfProfileActivity" />
         <activity android:name=".Prof.ProfSearchActivity"></activity>
+        <activity android:name=".Prof.Profile.ProfRegistration"></activity>
 
-        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".Prof.Profile.ProfPersonalDetails"></activity>
+        <activity android:name=".Prof.Profile.ProfColleagues"></activity>
+        <activity android:name=".Prof.Profile.ProfChangePW"></activity>
 
     </application>
 

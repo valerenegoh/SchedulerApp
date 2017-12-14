@@ -8,23 +8,44 @@
     <string name="profilefrag">Your Profile</string>
     <string name="notificationfrag">Notifications</string>
 
+    <string name="seatsavail">%d seats left</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="freshmore_modules">
+    <string-array name="Availabilities">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string-array name="HASS_modules">
         <item>10.001 Advanced Mathematics I</item>
         <item>10.002 Physics I</item>
         <item>10.006 Chemistry and Biology: Natural World</item>
         <item>02.001 World Texts and Interpretations </item>
-        <item>10.004 Advanced Mathematics II</item>
-        <item>10.005 Physics II</item>
-        <item>02.003 Theorizing Society, the Self, and Culture</item>
-        <item>03.007 Introduction to Design</item>
-        <item>10.007 Modelling the Systems World</item>
-        <item>10.008 Engineering in the Physical World</item>
-        <item>10.009 The Digital World</item>
-        <item>10.011 Introduction to Physical Chemistry​</item>
-        <item>10.012 Introduction to Biology</item>
+    </string-array>
+
+    <string-array name="freshmore_modules">
+        <item>02.109 Ethics of Leadership</item>
+        <item>02.115 Global Shakespeares</item>
+        <item>02.118 Film Studies II: Production</item>
+        <item>02.127 Satan and His Afterlives in Literature and Film</item>
+        <item>02.130 Slums, Squatters, and Smart Cities: History and Theory of Urban Planning</item>
+        <item>02.201 Digital Sociology</item>
+        <item>02.202 Organizational Processes</item>
+        <item>02.206 Ethics and Social Responsibility</item>
+        <item>02.207 Organizations and People</item>
+        <item>02.208 Microeconomics</item>
+        <item>02.218 Introduction to Psychology</item>
+        <item>02.219 Rice Cultures: Technology, Society and Environment in Asia​</item>
+        <item>02.220 “How the Things People Make, Make People”: Material Things in Social Life</item>
+        <item>02.221 Making Maps I: Introduction to Spatial Analysis, Data Visualization and Map Design</item>
+        <item>02.222 Unnatural Disasters</item>
     </string-array>
 
     <string-array name="ISTD_modules">

@@ -60,6 +60,7 @@
             android:layout_gravity="start"
             android:background="#FFFFFF"
             app:menu="@menu/studnav_bar" />
+
     </android.support.v4.widget.DrawerLayout>
 
     <FrameLayout

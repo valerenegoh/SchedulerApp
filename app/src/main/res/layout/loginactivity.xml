@@ -1,22 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="218dp"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@mipmap/sutd" />
 
     <Button
+        android:id="@+id/enterapp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loginbutton"
-        android:text="student login"
-        />
+        android:text="Enter"
+        android:background="@color/blueeeee"
+        android:fontFamily="casual"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+
+        android:layout_below="@+id/studentorProf"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/usernameicon"
+        android:layout_width="31dp"
+        android:layout_height="37dp"
+        android:layout_gravity="left"
+        app:srcCompat="@mipmap/usernameicon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="31dp"
+        android:layout_height="37dp"
+        app:srcCompat="@drawable/change_password"
+        android:layout_below="@+id/usernameicon"
+        android:layout_alignLeft="@+id/usernameicon"
+        android:layout_alignStart="@+id/usernameicon" />
+
+    <EditText
+        android:id="@+id/enterUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="13dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/usernameicon"
+        android:layout_toEndOf="@+id/usernameicon"
+        android:hint="Username"/>
+
+    <EditText
+        android:id="@+id/enterPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:fontFamily="sans-serif"
+        android:hint="Password"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:layout_below="@+id/enterUsername"
+        android:layout_alignLeft="@+id/enterUsername"
+        android:layout_alignStart="@+id/enterUsername"
+        android:inputType="textPassword" />
+
+    <RadioGroup
+        android:id="@+id/studentorProf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/enterPassword"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="340dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Student's Login"
+            android:buttonTint="@color/endblue" />
+
+        <RadioButton
+            android:id="@+id/prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/student"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Professor's Login"
+            android:buttonTint="@color/endblue" />
+    </RadioGroup>
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/signupbtn"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginprof"
-        android:text="prof login"
-        />
+        android:fontFamily="casual"
+        android:text="Not have an account? Sign up here!"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/enterapp"
+        android:onClick="buttonOnClick2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
 
-
-</LinearLayout>
+</RelativeLayout>

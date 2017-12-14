@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fitsSystemWindows="true">
 
     <android.support.v4.widget.DrawerLayout
@@ -114,8 +113,8 @@
                     android:layout_height="wrap_content"
                     android:textAllCaps="false"
                     android:layout_toRightOf="@id/booking_settings"
-                    android:text="Booking Settings"
-                    android:paddingRight="150dp"
+                    android:text="My Modules and Professors"
+                    android:paddingRight="75dp"
                     android:layout_marginLeft="10dp"
                     android:background="@null"/>
             </RelativeLayout>
@@ -136,16 +135,16 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/change_password">
+                    android:src="@drawable/capacity">
                 </ImageView>
                 <Button
-                    android:id="@+id/change_password_button"
+                    android:id="@+id/change_cap_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAllCaps="false"
                     android:layout_toRightOf="@id/change_password"
-                    android:text="Change Password"
-                    android:paddingRight="140dp"
+                    android:text="Change Default Capacity Size"
+                    android:paddingRight="70dp"
                     android:layout_marginLeft="10dp"
                     android:background="@null"/>
             </RelativeLayout>
@@ -156,6 +155,69 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/change_biblio"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/edit">
+                </ImageView>
+                <Button
+                    android:id="@+id/change_biblio_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_toRightOf="@id/change_biblio"
+                    android:text="Edit Description About Myself"
+                    android:paddingRight="70dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"/>
+            </RelativeLayout>
+            <View
+                android:id="@+id/line6"
+                android:background="@color/grey"
+                android:layout_width = "match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/change_pw"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/change_password">
+                </ImageView>
+                <Button
+                    android:id="@+id/change_pw_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_toRightOf="@id/change_pw"
+                    android:text="Change Password"
+                    android:paddingRight="135dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"/>
+            </RelativeLayout>
+            <View
+                android:id="@+id/line5"
+                android:background="@color/grey"
+                android:layout_width = "match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -197,7 +259,6 @@
             android:background="#FFFFFF"
             app:menu="@menu/studnav_bar" />
     </android.support.v4.widget.DrawerLayout>
-
 
     <FrameLayout
         android:id="@+id/fragmentholder"

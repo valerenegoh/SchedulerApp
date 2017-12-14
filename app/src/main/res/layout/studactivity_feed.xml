@@ -13,12 +13,19 @@
         android:id="@+id/drawerLayout"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerviewUpcoming"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-        </android.support.v7.widget.RecyclerView>
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerviewFeed"
+                android:layout_width="match_parent"
+                android:layout_height="440dp"
+                android:layout_marginTop="10dp">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
@@ -27,9 +34,8 @@
             android:layout_gravity="start"
             android:background="#FFFFFF"
             app:menu="@menu/studnav_bar" />
+
     </android.support.v4.widget.DrawerLayout>
-
-
 
     <FrameLayout
         android:id="@+id/fragmentholder"

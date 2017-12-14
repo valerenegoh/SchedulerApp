@@ -22,16 +22,20 @@ public class StudBookingCreateItem {
     private String description;
     private String mod;
     private Integer capacity;
+    private String creator;
     private long timestamp;
     private String timing;
 
+    public StudBookingCreateItem() {
+    }
+
     public StudBookingCreateItem(String title, String description, String timing, String date,
-                           String mod, String prof, Integer capacity, String creator, String venue) {
+                                 String mod, String prof, Integer capacity, String creator, String venue) {
         this.title = title;
         this.description = description;
         this.timing = timing;
         this.venue = venue;
-
+        this.creator = creator;
         this.date = date;
         this.mod = mod;
         this.prof = prof;
@@ -122,5 +126,13 @@ public class StudBookingCreateItem {
 
     public void setStudents(ArrayList<String> students) {
         this.students = students;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

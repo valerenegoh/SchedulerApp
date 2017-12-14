@@ -1,70 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    android:fitsSystemWindows="true">
-
-    <android.support.v4.widget.DrawerLayout
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchProfessors"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/drawerLayout"
-        android:orientation="vertical">
-        <TabHost
-            android:id="@+id/newbookingsTab"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></TabWidget>
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <include
-                        android:id="@+id/Professors"
-                        layout="@layout/stud_bookingprofs"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"></include>
-                    <include
-                        android:id="@+id/Modules"
-                        layout="@layout/stud_bookingmods"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"></include>
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="10dp"
+        android:padding="5dp"
+        android:queryHint="Search professors here"/>
 
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#FFFFFF"
-            app:menu="@menu/studnav_bar" />
-    </android.support.v4.widget.DrawerLayout>
+    <ListView
+        android:id="@+id/professorsList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#dedede" />
 
-    <FrameLayout
-        android:id="@+id/fragmentholder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottomNavView_Bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:background="#FFFFFF"
-            android:visibility="visible"
-            app:menu="@menu/studbottom_navigation_menu" />
-
-    </FrameLayout>
-
-</RelativeLayout>
+</LinearLayout>
