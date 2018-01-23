@@ -16,11 +16,9 @@ import com.example.androidapp1d.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-<<<<<<< HEAD
 import org.apache.commons.lang3.ArrayUtils;
 
-=======
->>>>>>> origin/Val
+
 /**
  * Created by ASUS on 12/12/2017.
  */
@@ -36,7 +34,6 @@ public class StudallMods extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<<<<<<< HEAD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stud_profileallmod);
 
@@ -93,13 +90,13 @@ public class StudallMods extends AppCompatActivity {
                 return false;
             }
         });
-=======
+
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.stud_profileallmod);
 
-            Intent i = this.getIntent();
-//        CREATOR = i.getStringExtra("studentName");
+            Intent in = this.getIntent();
+//        CREATOR = in.getStringExtra("studentName");
             CREATOR = "Valerene Goh";
 
             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -111,8 +108,8 @@ public class StudallMods extends AppCompatActivity {
 
             lv = (ListView) findViewById(R.id.modulesList);
 
-            final ArrayAdapter<String> lAdapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modList);
-            lv.setAdapter(lAdapter2);
+            final ArrayAdapter<String> lAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modList);
+            lv.setAdapter(lAdapter);
 
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -140,8 +137,8 @@ public class StudallMods extends AppCompatActivity {
                 }
             });
 
-            SearchView searchMods = (SearchView) findViewById(R.id.searchModules);
-            searchMods.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            SearchView searchMod = (SearchView) findViewById(R.id.searchModules);
+            searchMod.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     return false;
@@ -149,13 +146,13 @@ public class StudallMods extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    lAdapter2.getFilter().filter(newText);
+                    lAdapter.getFilter().filter(newText);
                     return false;
                 }
             });
         } catch(Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
->>>>>>> origin/Val
+
     }
 }
