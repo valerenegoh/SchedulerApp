@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -80,24 +79,22 @@ public class StudBookingProfSlot extends AppCompatActivity{
             queryProfBookingsTimeRef = firebaseDatabase.getReference().child("Bookings");  //look under every booking of the prof with the specified timing
             queryProfDateRef = firebaseDatabase.getReference().child("Bookings");
 
+
+
             //Get all bookings involving the prof
-            queryProfBookingsRef.addChildEventListener(new ChildEventListener() {
+            queryProfBookingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    profBooking = dataSnapshot.getValue(String.class);
-                    profBookings.add(profBooking);
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot aBooking: dataSnapshot.getChildren()){
+                        profBooking = dataSnapshot.getValue(String.class);
+                        profBookings.add(profBooking);
+                    }
+                    prof();
                 }
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
 
@@ -143,51 +140,6 @@ public class StudBookingProfSlot extends AppCompatActivity{
                         }
                     });
 
-                //get all prof bookings of that date
-                queryProfDateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        try{
-                            for(int i = 0; i < profBookings.size(); i++) {
-                                String date = dataSnapshot.child(profBookings.get(i)).child("date").getValue(String.class);
-                                if (date.equals(formattedDate)) {
-                                    profTodayBookings.add(profBookings.get(i));
-                                } else{
-                                    profTodayBookings.clear();
-                                }
-                            }
-                        } catch(Exception e){
-                            Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-                //for every booking of the prof for that day, get their slotsLeft
-                queryProfBookingsTimeRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        try{
-                            for (int i = 0; i < profTodayBookings.size(); i++) {
-                                timeSlot = dataSnapshot.child(profTodayBookings.get(i)).child("timing").getValue(String.class);
-                                capacity = dataSnapshot.child(profTodayBookings.get(i)).child("capacity").getValue(Integer.class);
-                                numStudents = (int) (dataSnapshot.child(profTodayBookings.get(i)).child("students").getChildrenCount());
-                                title = dataSnapshot.child(profTodayBookings.get(i)).child("title").getValue(String.class);
-                                String[] info = new String[2];
-                                info[0] = String.valueOf(capacity - numStudents);
-                                info[1] = title;
-                                timeArray.put(timeSlot, info);
-                            }
-                        } catch(Exception e){
-                            Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
                 }
             });
 
@@ -205,6 +157,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
                     for (int i = 0; i < orderedTimeArray.size(); i++) {
                         bookingTitles[i] = timeArray.get(orderedTimeArray.get(i))[1];
                         slotsLeft = timeArray.get(orderedTimeArray.get(i))[0];
+                        Toast.makeText(StudBookingProfSlot.this, "slots left " + slotsLeft, Toast.LENGTH_SHORT).show();
                         if (slotsLeft == "NIL") {      //time slot not booked
                             colors[i] = R.color.emptySlot;
                             availabilityStatus[i] = "Available";
@@ -224,8 +177,59 @@ public class StudBookingProfSlot extends AppCompatActivity{
                 }
             });
         } catch(Exception e){
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void prof(){
+        //get all prof bookings of that date
+        queryProfDateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    for(int i = 0; i < profBookings.size(); i++) {
+                        String date = dataSnapshot.child(profBookings.get(i)).child("date").getValue(String.class);
+                        if (date.equals(formattedDate)) {
+                            profTodayBookings.add(profBookings.get(i));
+                        } else{
+                            profTodayBookings.clear();
+                        }
+                    }
+                    Toast.makeText(StudBookingProfSlot.this, profTodayBookings.toString(), Toast.LENGTH_SHORT).show();
+                    query();
+                } catch(Exception e){
+                    Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void query(){
+        //for every booking of the prof for that day, get their slotsLeft
+        queryProfBookingsTimeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    for (int i = 0; i < profTodayBookings.size(); i++) {
+                        timeSlot = dataSnapshot.child(profTodayBookings.get(i)).child("timing").getValue(String.class);
+                        capacity = dataSnapshot.child(profTodayBookings.get(i)).child("capacity").getValue(Integer.class);
+                        numStudents = (int) (dataSnapshot.child(profTodayBookings.get(i)).child("students").getChildrenCount());
+                        title = dataSnapshot.child(profTodayBookings.get(i)).child("title").getValue(String.class);
+                        String[] info = new String[2];
+                        info[0] = String.valueOf(capacity - numStudents);
+                        info[1] = title;
+                        timeArray.put(timeSlot, info);
+                    }
+                } catch(Exception e){
+                    Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     public HashMap<String, String[]> getTimeSlots(LocalTime startTime, LocalTime endTime, int slotSizeInMinutes) {
