@@ -2,16 +2,22 @@ package com.example.androidapp1d.Stud.Profile;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
+import com.example.androidapp1d.Stud.Feed.StudFeedActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +32,11 @@ import java.util.ArrayList;
 
 public class StudRegistration extends AppCompatActivity {
 
-    private EditText username, email, studentID, aboutme, capacity;
+    private EditText username, email, studentID, aboutme, capacity, password;
     private RadioGroup year;
+    private CheckBox showhidepassword;
     private Button modulesButton, profsButton, register;
-    private String usernameInput, emailInput, studentIDInput, aboutmeInput, yearInput, capacityInput;
+    private String usernameInput, emailInput, studentIDInput, aboutmeInput, yearInput, capacityInput, pwInput;
     private String[] modulesListItems, profsListItems;
     private boolean[] checkedModules, checkedProfs;
     private ArrayList<String> selectedmodulesList = new ArrayList<>();
@@ -55,10 +62,26 @@ public class StudRegistration extends AppCompatActivity {
             modulesButton = (Button) findViewById(R.id.select_modules);
             profsButton = (Button) findViewById(R.id.select_profs);
             register = (Button) findViewById(R.id.register);
+            showhidepassword = (CheckBox) findViewById(R.id.cbShowPwd);
+            password = (EditText) findViewById(R.id.student_password);
 
             database = FirebaseDatabase.getInstance();
             profRef = database.getReference().child("Professors");
             studentRef = database.getReference().child("Students");
+
+            showhidepassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    // checkbox status is changed from uncheck to checked.
+                    if (!isChecked) {
+                        // show password
+                        password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    } else {
+                        // hide password
+                        password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                }
+            });
 
             //register button
             register.setOnClickListener(new View.OnClickListener() {
@@ -70,15 +93,21 @@ public class StudRegistration extends AppCompatActivity {
                         studentIDInput = studentID.getText().toString().trim();
                         aboutmeInput = aboutme.getText().toString().trim();
                         capacityInput = capacity.getText().toString().trim();
+                        pwInput = password.getText().toString().trim();
                         if (usernameInput.trim().isEmpty() || emailInput.isEmpty() || aboutmeInput.isEmpty() ||
-                                capacity.getText().toString().trim().isEmpty()) {
+                                capacityInput.isEmpty() || pwInput.isEmpty()) {
                             Toast.makeText(StudRegistration.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                         } else if (selectedmodulesList.isEmpty() || selectedProfList.isEmpty()) {
                             Toast.makeText(StudRegistration.this, "Please select your modules", Toast.LENGTH_SHORT).show();
                         } else {
-                            studItem = new StudItem(yearInput, aboutmeInput, emailInput, studentIDInput,
+                            studItem = new StudItem(pwInput, yearInput, aboutmeInput, emailInput, studentIDInput,
                                     Integer.parseInt(capacityInput), selectedProfList, selectedmodulesList);
                             studentRef.child(usernameInput).setValue(studItem);
+                            Toast.makeText(StudRegistration.this, "Welcome to Plandular, "
+                                    + usernameInput + "!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(StudRegistration.this, StudFeedActivity.class);
+                            i.putExtra("creator", usernameInput);
+                            startActivity(i);
                         }
                     } catch (Exception e){
                         Toast.makeText(StudRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();

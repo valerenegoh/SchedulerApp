@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.androidapp1d.Prof.ProfReportStudentsPage">
+
+
+    <TextView
+        android:id="@+id/reportstudents"
+        android:layout_width="288dp"
+        android:layout_height="22dp"
+        android:fontFamily="sans-serif"
+        android:text="Block students after how many reports?"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/numberoftimesreport"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif"
+        android:hint="Enter an integer value"
+        android:inputType="text"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:layout_below="@+id/reportstudents"
+        android:layout_alignStart="@+id/reportstudents"
+        android:layout_alignLeft="@+id/reportstudents" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="How long do you want the students to be blocked?"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="95dp"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/numberoftimesreport"
+        android:layout_alignStart="@id/reportstudents"
+        android:layout_alignLeft="@id/reportstudents" />
+
+    <EditText
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:hint="Enter an integer value"
+        android:inputType="text"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="104dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignStart="@+id/reportstudents"
+        android:layout_alignLeft="@+id/reportstudents" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Blocked students:"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="95dp"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textView5"
+        android:layout_alignStart="@+id/reportstudents"
+        android:layout_alignLeft="@+id/reportstudents" />
+
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@id/textView6"
+        android:layout_below="@id/textView5"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_add_black_24dp" />
+
+    <EditText
+        android:id="@+id/inputblockedstudent"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/add_button"
+        android:layout_below="@id/textView5"
+        android:paddingTop="25dp"/>
+
+    <ListView
+        android:id="@+id/reportstudentlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView6" />
+
+
+</RelativeLayout>

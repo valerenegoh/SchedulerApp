@@ -1,6 +1,7 @@
 package com.example.androidapp1d.Stud.Booking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ public class StudBookingDetailsAdapter extends RecyclerView.Adapter<StudBookingD
     Context context;
     ArrayList<StudBookingItem> bookings, filterList;
     StudBookingCustomFilter filter;
-    public static final String KEY = "GetBookingDetails";
+    String fulldate, creator;
 
     public StudBookingDetailsAdapter(Context context, ArrayList<StudBookingItem> bookings){
         this.context = context;
@@ -41,20 +42,25 @@ public class StudBookingDetailsAdapter extends RecyclerView.Adapter<StudBookingD
     @Override
     public void onBindViewHolder(StudBookingDetailsHolder holder, final int position) {
         //bind data to view
+        fulldate = bookings.get(position).getDate();
+
         holder.title.setText(bookings.get(position).getTitle());
         holder.prof.setText(bookings.get(position).getProf());
         holder.venue.setText(bookings.get(position).getVenue());
-        holder.date.setText(bookings.get(position).getDate());
+        holder.date.setText(fulldate.replace(", ", ",\n"));
         holder.description.setText(bookings.get(position).getDescription());
+
+        creator = bookings.get(position).getStudent();
 
         //implement click listener
         holder.details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CharSequence bookingTitle = bookings.get(position).getTitle();
-                /*Intent i = new Intent(context, StudBookingItem.class);
-                i.putExtra(KEY, bookingTitle);
-                context.startActivity(i);*/
+                Intent i = new Intent(context, StudBookingDetails.class);
+                i.putExtra("creator", creator);
+                i.putExtra("bookingID", bookings.get(position).getId());
+                context.startActivity(i);
                 Snackbar.make(v, bookingTitle + " details", Snackbar.LENGTH_SHORT).show();
             }
         });

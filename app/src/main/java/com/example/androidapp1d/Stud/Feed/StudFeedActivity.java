@@ -9,20 +9,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.androidapp1d.R;
 import com.example.androidapp1d.Stud.Booking.StudBookingActivity;
-import com.example.androidapp1d.Stud.Booking.StudnewBookingActivity;
+import com.example.androidapp1d.Stud.Profile.StudeditProfModActivity;
 import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
-import com.example.androidapp1d.Stud.StudNotificationActivity;
 import com.example.androidapp1d.Stud.StudSearchActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -33,11 +38,16 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-
+    private ArrayList<String> mods = new ArrayList<>();
+    private ArrayList<String> profs = new ArrayList<>();
+    private ArrayList<StudFeedItem> acceptedBookings = new ArrayList<>();
+    private ArrayList<String> acceptedBookingNames = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference allBookingsDatabaseReference;
-    private Query upcomingBookingsQuery;
-    private ArrayList<Integer> rawUpcomingBookings;
+    private DatabaseReference allBookingsDatabaseReference, StudRef;
+    private RecyclerView rv1;
+    private long timestamp, currentTime;
+    private long dayFromNow = 259200000/1000;
+    private String title, prof, description, mod, time, creator, id, USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,36 +57,80 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
 
             getSupportActionBar().setTitle("Feed");
 
-//            firebaseDatabase = FirebaseDatabase.getInstance();
-//            allBookingsDatabaseReference = firebaseDatabase.getReference().child("Bookings");
-//            Toast.makeText(this, "there are bookings", Toast.LENGTH_SHORT).show();
-//
-//            upcomingBookingsQuery = allBookingsDatabaseReference.orderByChild("timestamp").startAt(new Date().getTime());
-//            upcomingBookingsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    Toast.makeText(StudFeedActivity.this, "There are " +
-//                            dataSnapshot.getChildrenCount() + " upcomingBookings", Toast.LENGTH_SHORT).show();
-//                    Map<String, Integer> td = (HashMap<String, Integer>) dataSnapshot.getValue();
-//                    rawUpcomingBookings = new ArrayList<String>(td.values());
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                }
-//            });
-//
-//            ArrayList<StudBookingItem> upcomingBookingItems = getBookingItems(rawUpcomingBookings);
-//
-//            RecyclerView rv1 = (RecyclerView) findViewById(R.id.recyclerviewUpcoming);
-//            rv1.setLayoutManager(new LinearLayoutManager(this));
-//            rv1.setItemAnimator(new DefaultItemAnimator());
-//
-//            if (rawUpcomingBookings != null) {
-//                final StudFeedDetailsAdapter adapter = new StudFeedDetailsAdapter(this, upcomingBookingItems);
-//                rv1.setAdapter(adapter);
-//            }
+            Intent i = this.getIntent();
+            USER = i.getStringExtra("creator");
 
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            allBookingsDatabaseReference = firebaseDatabase.getReference().child("Bookings");
+            StudRef = firebaseDatabase.getReference().child("Students").child(USER);
+
+            //get all mods & profs of student
+            StudRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    try {
+                        for (DataSnapshot aMod : dataSnapshot.child("mods").getChildren()) {
+                            mods.add(aMod.getValue(String.class));
+                        }
+                        for (DataSnapshot aProf : dataSnapshot.child("favProfs").getChildren()) {
+                            profs.add(aProf.getValue(String.class));
+                        }
+                        uploadBookings();
+                    } catch(Exception e){
+                        Toast.makeText(StudFeedActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+
+            //add listener for updates
+            allBookingsDatabaseReference.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    try {
+                        for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
+                            //if it involves you
+                            if (mods.contains(aBooking.child("mod").getValue(String.class)) ||
+                                    profs.contains(aBooking.child("prof").getValue(String.class))) {
+                                //if it is happening soon
+                                timestamp = aBooking.child("timestamp").getValue(Long.class);
+                                currentTime = System.currentTimeMillis() / 1000;
+                                Toast.makeText(StudFeedActivity.this, "new update available", Toast.LENGTH_SHORT).show();
+                                if (currentTime <= timestamp && timestamp < (currentTime + dayFromNow)) {
+                                    id = aBooking.getKey();
+                                    title = aBooking.child("title").getValue(String.class);
+                                    prof = aBooking.child("prof").getValue(String.class);
+                                    creator = aBooking.child("creator").getValue(String.class);
+                                    time = aBooking.child("timing").getValue(String.class);
+                                    description = aBooking.child("description").getValue(String.class);
+                                    mod = aBooking.child("mod").getValue(String.class);
+                                    acceptedBookings.add(0, new StudFeedItem(id, USER, title, prof, description, mod, time, creator));
+                                    if(acceptedBookings.size() == 30){
+                                        acceptedBookings.remove(29);
+                                    }
+                                    displayFeed();
+                                }
+                            }
+                        }
+                    } catch(Exception e){
+                        Toast.makeText(StudFeedActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
             //=============================================================================
 
             drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -101,11 +155,13 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
                             drawerLayout.closeDrawer(navigationView);
                             break;
                         case (R.id.side_booking):
-                            Intent h = new Intent(StudFeedActivity.this, StudnewBookingActivity.class);
+                            Intent h = new Intent(StudFeedActivity.this, StudeditProfModActivity.class);
+                            h.putExtra("creator", USER);
                             startActivity(h);
                             break;
                         case (R.id.side_profile):
                             Intent i = new Intent(StudFeedActivity.this, StudProfileActivity.class);
+                            i.putExtra("creator", USER);
                             startActivity(i);
                             break;
                     }
@@ -121,38 +177,87 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case (R.id.ic_feed):
-                            break;
-                        case (R.id.ic_booking):
-                            Intent h = new Intent(StudFeedActivity.this, StudBookingActivity.class);
-                            startActivity(h);
-                            break;
-                        case (R.id.ic_profile):
-                            Intent i = new Intent(StudFeedActivity.this, StudProfileActivity.class);
-                            startActivity(i);
-                            break;
-                        case (R.id.ic_search):
-                            Intent j = new Intent(StudFeedActivity.this, StudSearchActivity.class);
-                            startActivity(j);
-                            break;
-                    }
-                    return false;
+                switch (item.getItemId()) {
+                    case (R.id.ic_feed):
+                        break;
+                    case (R.id.ic_booking):
+                        Intent h = new Intent(StudFeedActivity.this, StudBookingActivity.class);
+                        h.putExtra("creator", USER);
+                        startActivity(h);
+                        break;
+                    case (R.id.ic_profile):
+                        Intent i = new Intent(StudFeedActivity.this, StudProfileActivity.class);
+                        i.putExtra("creator", USER);
+                        startActivity(i);
+                        break;
+                    case (R.id.ic_search):
+                        Intent j = new Intent(StudFeedActivity.this, StudSearchActivity.class);
+                        startActivity(j);
+                        break;
+                }
+                return false;
                 }
             });
         } catch(Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-//
-//    public ArrayList<StudBookingItem> getBookingItems(ArrayList<String> rawBookingItems){
-//        ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
-//        for (int i = 0; i < rawBookingItems.size(); i++) {
-//            StudBookingItem bookingItem = new StudBookingItem(context, rawBookingItems.get(i));
-//            bookingItems.add(bookingItem);
-//        }
-//        return bookingItems;
-//    }
+
+    public void uploadBookings(){
+        //upload once
+        allBookingsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    for(DataSnapshot aBooking: dataSnapshot.getChildren()){
+                        //if it involves you
+                        if (mods.contains(aBooking.child("mod").getValue(String.class)) ||
+                                profs.contains(aBooking.child("prof").getValue(String.class))) {
+                            //if it is happening soon
+                            timestamp = aBooking.child("timestamp").getValue(Long.class);
+                            currentTime = System.currentTimeMillis() / 1000;
+//                            Toast.makeText(StudFeedActivity.this, aBooking.child("title").getValue(String.class) + ": " +
+//                                    Boolean.toString(currentTime <= timestamp && timestamp < (currentTime + dayFromNow)), Toast.LENGTH_SHORT).show();
+                            if (currentTime <= timestamp && timestamp < (currentTime + dayFromNow)) {
+                                id = aBooking.getKey();
+                                title = aBooking.child("title").getValue(String.class);
+                                prof = aBooking.child("prof").getValue(String.class);
+                                creator = aBooking.child("creator").getValue(String.class);
+                                time = aBooking.child("timing").getValue(String.class);
+                                description = aBooking.child("description").getValue(String.class);
+                                mod = aBooking.child("mod").getValue(String.class);
+                                acceptedBookings.add(new StudFeedItem(id, USER, title, prof, description, mod, time, creator));
+                                acceptedBookingNames.add(title);
+                            }
+                        }
+                    }
+                    displayFeed();
+                } catch(Exception e){
+                    Toast.makeText(StudFeedActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void displayFeed(){
+        try {
+            if(acceptedBookingNames.isEmpty()){
+                Toast.makeText(this, "no feed for these three days", Toast.LENGTH_SHORT).show();
+            }
+            final StudFeedDetailsAdapter adapterFeed = new StudFeedDetailsAdapter(this, acceptedBookings);
+            rv1 = (RecyclerView) findViewById(R.id.recyclerviewFeed);
+            rv1.setLayoutManager(new LinearLayoutManager(this));
+            rv1.setItemAnimator(new DefaultItemAnimator());
+            adapterFeed.notifyDataSetChanged();
+            rv1.setAdapter(adapterFeed);
+
+        } catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -161,7 +266,7 @@ public class StudFeedActivity extends AppCompatActivity implements NavigationVie
     }
 
     public void goNotificationActivity(){
-        startActivity(new Intent(this,StudNotificationActivity.class)) ;
+        startActivity(new Intent(this,StudNotificationActivity.class));
     }
 
     public void goSearchActivity(){

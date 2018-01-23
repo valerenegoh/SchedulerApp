@@ -23,11 +23,12 @@ public class StudBookingListViewAdapter extends BaseAdapter {
     Integer[] colors;
     String[] availability;
     String[] bookingIDs;
-    String profName, Date;
+    String profName, Date, creator;
     private static LayoutInflater inflater = null;
 
-    public StudBookingListViewAdapter(Context context, String profName, String Date, String[] timeSlots, Integer[] colors, String[] availability, String[] bookingIDs) {
+    public StudBookingListViewAdapter(Context context, String creator, String profName, String Date, String[] timeSlots, Integer[] colors, String[] availability, String[] bookingIDs) {
         this.context = context;
+        this.creator = creator;
         this.profName = profName;
         this.Date = Date;
         this.timeSlots = timeSlots;
@@ -58,6 +59,7 @@ public class StudBookingListViewAdapter extends BaseAdapter {
         Button book;
 
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -84,6 +86,7 @@ public class StudBookingListViewAdapter extends BaseAdapter {
                         i.putExtra("time", timeSlots[position]);
                         i.putExtra("date", Date);
                         i.putExtra("prof", profName);
+                        i.putExtra("creator", creator);
                         context.startActivity(i);
                     }
                 });

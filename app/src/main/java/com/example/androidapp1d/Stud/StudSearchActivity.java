@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.androidapp1d.R;
-import com.example.androidapp1d.Stud.Booking.StudnewBookingActivity;
+import com.example.androidapp1d.Stud.Profile.StudeditProfModActivity;
 import com.example.androidapp1d.Stud.Feed.StudFeedActivity;
 import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
 
@@ -52,7 +52,7 @@ public class StudSearchActivity extends AppCompatActivity {
                         startActivity(h);
                         break;
                     case (R.id.ic_booking):
-                        Intent j= new Intent(StudSearchActivity.this,StudnewBookingActivity.class);
+                        Intent j= new Intent(StudSearchActivity.this,StudeditProfModActivity.class);
                         startActivity(j);
                         break;
                     case (R.id.ic_profile):

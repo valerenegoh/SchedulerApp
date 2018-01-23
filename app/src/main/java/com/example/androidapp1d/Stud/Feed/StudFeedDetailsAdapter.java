@@ -1,19 +1,17 @@
 package com.example.androidapp1d.Stud.Feed;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.androidapp1d.R;
-import com.example.androidapp1d.Stud.Booking.StudBookingCustomFilter;
-import com.example.androidapp1d.Stud.Booking.StudBookingItem;
+import com.example.androidapp1d.Stud.Booking.StudBookingDetails;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -23,23 +21,20 @@ import java.util.ArrayList;
 public class StudFeedDetailsAdapter extends RecyclerView.Adapter<StudFeedDetailsHolder> {
 
     Context context;
-    ArrayList<StudBookingItem> bookings, filterList;
-    StudBookingCustomFilter filter;
-    public static final String KEY = "GetBookingDetails";
-    private String mod;
+    ArrayList<StudFeedItem> bookings;
+    private String title;
     private long timestamp;
-    private String time;
+    private String time, timing, creator;
 
-    public StudFeedDetailsAdapter(Context context, ArrayList<StudBookingItem> bookings){
+    public StudFeedDetailsAdapter(Context context, ArrayList<StudFeedItem> bookings){
         this.context = context;
         this.bookings = bookings;
-        this.filterList = bookings;
     }
 
     @Override
     public StudFeedDetailsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //Convert to view object
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_card, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.stud_feed_card, null);
         StudFeedDetailsHolder holder = new StudFeedDetailsHolder(view);
         return holder;
     }
@@ -47,30 +42,33 @@ public class StudFeedDetailsAdapter extends RecyclerView.Adapter<StudFeedDetails
     @Override
     public void onBindViewHolder(StudFeedDetailsHolder holder, final int position) {
         //bind data to view
+        try {
+            title = bookings.get(position).getTitle();
+            timing = bookings.get(position).getTiming();
+            time = timing.substring(0, timing.indexOf("-"));
 
-        mod = bookings.get(position).getMod();
-        timestamp = bookings.get(position).getTimestamp();
-        if(DateUtils.isToday(timestamp)){
-            DateFormat formatter = new SimpleDateFormat("HH:mm");
-            time = formatter.format(timestamp);
-        }
-        holder.announcement.setText(mod + " starting at " + time);
-        holder.title.setText(bookings.get(position).getTitle());
-        holder.prof.setText(bookings.get(position).getProf());
-        holder.time.setText(bookings.get(position).getTiming());
-        holder.description.setText(bookings.get(position).getDescription());
+            holder.announcement.setText(title + " starts at " + time);
+            holder.mod.setText(bookings.get(position).getMod());
+            holder.prof.setText(bookings.get(position).getProf());
+            holder.creator.setText(bookings.get(position).getCreator());
+            holder.description.setText(bookings.get(position).getDescription());
+            creator = bookings.get(position).getStudent();
 
-        //implement click listener
-        holder.details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence bookingTitle = bookings.get(position).getTitle();
-                /*Intent i = new Intent(context, StudBookingItem.class);
-                i.putExtra(KEY, bookingTitle);
-                context.startActivity(i);*/
+            //implement click listener
+            holder.details.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CharSequence bookingTitle = bookings.get(position).getTitle();
+                Intent i = new Intent(context, StudBookingDetails.class);
+                i.putExtra("creator", creator);
+                i.putExtra("bookingID", bookings.get(position).getId());
+                context.startActivity(i);
                 Snackbar.make(v, bookingTitle + " details", Snackbar.LENGTH_SHORT).show();
-            }
-        });
+                }
+            });
+        } catch (Exception e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

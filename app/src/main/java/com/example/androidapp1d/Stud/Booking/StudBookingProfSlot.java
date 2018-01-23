@@ -1,6 +1,7 @@
 package com.example.androidapp1d.Stud.Booking;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
     CalendarView calendarView;
     TextView dateView;
     ListView lv;
-    private static final String PROF = "Oka Kuniawaran";
+    private String PROF, CREATOR;
     private int slotSize = 30;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference queryProfAvailabilityRef, queryProfBookingsRef,
@@ -64,6 +65,10 @@ public class StudBookingProfSlot extends AppCompatActivity{
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.stud_bookingprofslot);
+
+            Intent i = this.getIntent();
+            CREATOR = i.getStringExtra("creator");
+            PROF = i.getStringExtra("profName");
 
             dateView = (TextView) findViewById(R.id.date);
             dropDownButton = (ImageButton) findViewById(R.id.dropdownButton);
@@ -211,7 +216,7 @@ public class StudBookingProfSlot extends AppCompatActivity{
                             availabilityStatus[i] = slotsLeft + " Slots Available";
                         }
                     }
-                    lv.setAdapter(new StudBookingListViewAdapter(StudBookingProfSlot.this, PROF, formattedDate,
+                    lv.setAdapter(new StudBookingListViewAdapter(StudBookingProfSlot.this, CREATOR, PROF, formattedDate,
                             orderedTimeArray.toArray(new String[orderedTimeArray.size()]), colors, availabilityStatus, bookingTitles));
                 } catch (Exception e){
                     Toast.makeText(StudBookingProfSlot.this, e.getMessage(), Toast.LENGTH_SHORT).show();

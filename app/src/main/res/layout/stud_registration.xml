@@ -20,7 +20,7 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="username"/>
+                android:hint="Create Username"/>
 
             <EditText
                 android:id="@+id/studentID"
@@ -43,47 +43,72 @@
                 android:hint="About Me"/>
 
             <EditText
-                android:id="@+id/student_capacity"
+                android:id="@+id/student_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="default booking capacity preference"/>
+                android:inputType="textPassword"
+                android:hint="Set Password"/>
 
-            <RadioGroup
-                android:id="@+id/student_year"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <RadioButton
-                    android:id="@+id/freshmore"
-                    android:layout_width="match_parent"
+
+                <RadioGroup
+                    android:id="@+id/student_year"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="20dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/freshmore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Freshmore"
+                        android:buttonTint="@color/colorPrimary"/>
+                    <RadioButton
+                        android:id="@+id/ISTDpillar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ISTD"
+                        android:buttonTint="@color/colorPrimary"/>
+                    <RadioButton
+                        android:id="@+id/EPDpillar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="EPD"
+                        android:buttonTint="@color/colorPrimary"/>
+                    <RadioButton
+                        android:id="@+id/ESDpillar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ESD"
+                        android:buttonTint="@color/colorPrimary"/>
+                    <RadioButton
+                        android:id="@+id/ASDpillar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ASD"
+                        android:buttonTint="@color/colorPrimary"/>
+                </RadioGroup>
+
+                <CheckBox
+                    android:id="@+id/cbShowPwd"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Freshmore"
-                    android:buttonTint="@color/colorPrimary"/>
-                <RadioButton
-                    android:id="@+id/ISTDpillar"
-                    android:layout_width="match_parent"
+                    android:checked="false"
+                    android:text="Show/Hide password"
+                    android:buttonTint="@color/endblue" />
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/student_capacity"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ISTD"
-                    android:buttonTint="@color/colorPrimary"/>
-                <RadioButton
-                    android:id="@+id/EPDpillar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="EPD"
-                    android:buttonTint="@color/colorPrimary"/>
-                <RadioButton
-                    android:id="@+id/ESDpillar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ESD"
-                    android:buttonTint="@color/colorPrimary"/>
-                <RadioButton
-                    android:id="@+id/ASDpillar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ASD"
-                    android:buttonTint="@color/colorPrimary"/>
-            </RadioGroup>
+                    android:layout_below="@id/cbShowPwd"
+                    android:inputType="number"
+                    android:hint="default booking capacity"/>
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

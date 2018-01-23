@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.example.androidapp1d.R;
 import com.example.androidapp1d.Stud.Feed.StudFeedActivity;
+import com.example.androidapp1d.Stud.Feed.StudNotificationActivity;
 import com.example.androidapp1d.Stud.Profile.StudProfileActivity;
-import com.example.androidapp1d.Stud.StudNotificationActivity;
 import com.example.androidapp1d.Stud.StudSearchActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class StudBookingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -44,21 +43,19 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
     private FloatingActionButton addBooking;
     private RecyclerView rv1, rv2, rv3, rv4;
     private SearchView searchUpcoming, searchPrev, searchFavs, searchPending;
-    private StudBookingDetailsAdapter adapter = null;
+    private StudBookingDetailsAdapter adapter1 = null, adapter2 = null, adapter3 = null, adapter4 = null;
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference referredBookingsRef, allBookingsRef, favRef, pendingRef;
-    private ArrayList<String> rawBookings = new ArrayList<>();
-    private ArrayList<String> rawUpcomingBookings = new ArrayList<>();
-    private ArrayList<String> rawPreviousBookings = new ArrayList<>();
-    private ArrayList<String> rawFavouriteBookings = new ArrayList<>();
-    private ArrayList<String> rawPendingBookings = new ArrayList<>();
-    ArrayList<StudBookingItem> upcomingBookingItems, previousBookingItems, favouriteBookingItems, pendingBookingsItems;
+    private DatabaseReference referredBookingsRef, allBookingsRef, favRef, pendingRef, allPendingRef;
+    private ArrayList<StudBookingItem> upcomingBookingItems = new ArrayList<>();
+    private ArrayList<StudBookingItem> previousBookingItems = new ArrayList<>();
+    private ArrayList<StudBookingItem> favouriteBookingItems = new ArrayList<>();
+    private ArrayList<StudBookingItem> pendingBookingsItems = new ArrayList<>();
     private long timestamp;
+    private int numAll, numFav, numPend;
+    private String CREATOR;
 
     private Context context = StudBookingActivity.this;
-
-    private static final String KEY = "Valerene Goh";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +65,11 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
         getSupportActionBar().setTitle("Your Bookings");
 
+        Intent i = this.getIntent();
+        CREATOR = i.getStringExtra("creator");
+
         tabHost = (TabHost) findViewById(R.id.bookingsTab);
+
         tabHost.setup();
         TabHost.TabSpec upcomingTab = tabHost.newTabSpec("FUTURE");
         upcomingTab.setIndicator("FUTURE");
@@ -85,8 +86,8 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         favTab.setContent(R.id.Favs);
         tabHost.addTab(favTab);
 
-        TabHost.TabSpec pendingTab = tabHost.newTabSpec("PENDING");
-        pendingTab.setIndicator("PENDING");
+        TabHost.TabSpec pendingTab = tabHost.newTabSpec("PENDIN");
+        pendingTab.setIndicator("PENDIN");
         pendingTab.setContent(R.id.Pending);
         tabHost.addTab(pendingTab);
 
@@ -96,73 +97,106 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(StudBookingActivity.this, StudnewBookingActivity.class);
+                i.putExtra("studentName", CREATOR);
                 startActivity(i);
             }
         });
 
+        rv1 = (RecyclerView) findViewById(R.id.recyclerviewUpcoming);
+        searchUpcoming = (SearchView) findViewById(R.id.searchUpcoming);
+        rv2 = (RecyclerView) findViewById(R.id.recyclerviewPrevious);
+        searchPrev = (SearchView) findViewById(R.id.searchPrevious);
+        rv3 = (RecyclerView) findViewById(R.id.recyclerviewFavourites);
+        searchFavs = (SearchView) findViewById(R.id.searchFavourites);
+        rv4 = (RecyclerView) findViewById(R.id.recyclerviewPending);
+        searchPending = (SearchView) findViewById(R.id.searchPending);
+
         //fetch booking details (by instantiation id) from firebase & store its details in ArrayList
         firebaseDatabase = FirebaseDatabase.getInstance();
         referredBookingsRef = firebaseDatabase.getReference().child("Bookings");
-        allBookingsRef = firebaseDatabase.getReference().child("Students").child(KEY).child("allBookings");
-        favRef =  firebaseDatabase.getReference().child("Students").child(KEY).child("favBookings");
-        pendingRef =  firebaseDatabase.getReference().child("Students").child(KEY).child("pendingBookings");
+        allBookingsRef = firebaseDatabase.getReference().child("Students").child(CREATOR).child("allBookings");
+        favRef =  firebaseDatabase.getReference().child("Students").child(CREATOR).child("favBookings");
+        pendingRef =  firebaseDatabase.getReference().child("Students").child(CREATOR).child("pendingBookings");
+        allPendingRef = firebaseDatabase.getReference().child("pendingBookings");
+
+        //================================UPCOMING & PREVIOUS TAB===============================
 
         allBookingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
-                    rawBookings.add(aBooking.getValue(String.class));
+                numAll = (int) dataSnapshot.getChildrenCount();
+                try {
+                    for (DataSnapshot aBooking : dataSnapshot.getChildren()) {
+                        referredBookingsRef.child(aBooking.getValue(String.class)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                try {
+                                    String id = dataSnapshot.getKey();
+                                    String title = dataSnapshot.child("title").getValue(String.class);
+                                    String prof = dataSnapshot.child("prof").getValue(String.class);
+                                    String venue = dataSnapshot.child("venue").getValue(String.class);
+                                    String date = dataSnapshot.child("date").getValue(String.class);
+                                    String description = dataSnapshot.child("description").getValue(String.class);
+                                    timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
+                                    if (timestamp >= System.currentTimeMillis()/1000) {
+                                        upcomingBookingItems.add(new StudBookingItem(id, CREATOR, title, prof, venue, date, description));
+                                    } else {
+                                        previousBookingItems.add(new StudBookingItem(id, CREATOR, title, prof, venue, date, description));
+                                    }
+                                    if((upcomingBookingItems.size() + previousBookingItems.size()) == numAll){
+                                        displayUpcoming();
+                                        displayPrevious();
+                                    }
+                                } catch (Exception e){
+                                    Toast.makeText(StudBookingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                } catch (Exception e){
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                runTimeComparison();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
-        //================================UPCOMING TAB================================
-
-        rv1 = (RecyclerView) findViewById(R.id.recyclerviewUpcoming);
-        rv1.setLayoutManager(new LinearLayoutManager(this));
-        rv1.setItemAnimator(new DefaultItemAnimator());
-        searchUpcoming = (SearchView) findViewById(R.id.searchUpcoming);
-
-        //================================PREVIOUS TAB================================
-
-        rv2 = (RecyclerView) findViewById(R.id.recyclerviewPrevious);
-        rv2.setLayoutManager(new LinearLayoutManager(this));
-        rv2.setItemAnimator(new DefaultItemAnimator());
-        searchPrev = (SearchView) findViewById(R.id.searchPrevious);
-
-        //================================FAVOURITES TAB================================
-
-        rv3 = (RecyclerView) findViewById(R.id.recyclerviewFavourites);
-        rv3.setLayoutManager(new LinearLayoutManager(this));
-        rv3.setItemAnimator(new DefaultItemAnimator());
-        searchFavs = (SearchView) findViewById(R.id.searchFavourites);
+        //================================FAVOURITES TAB===============================
 
         try {
             favRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot aBooking : dataSnapshot.getChildren()) {
-                        rawFavouriteBookings.add(aBooking.getValue(String.class));
-                    }
-                    if (rawFavouriteBookings == null) {
-                        Toast.makeText(context, "No favourite booking items", Toast.LENGTH_SHORT).show();
-                    } else {
-                        favouriteBookingItems = getBookingItems(rawFavouriteBookings, false);
-                        adapter = new StudBookingDetailsAdapter(context, favouriteBookingItems);
-                    }
+                    numFav = (int) dataSnapshot.getChildrenCount();
                     try {
-                        //TODO: think of another work around the asynchronousity. progress bar?
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        for (DataSnapshot aBooking : dataSnapshot.getChildren()) {
+                            referredBookingsRef.child(aBooking.getValue(String.class)).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    String id = dataSnapshot.getKey();
+                                    String title = dataSnapshot.child("title").getValue(String.class);
+                                    String prof = dataSnapshot.child("prof").getValue(String.class);
+                                    String venue = dataSnapshot.child("venue").getValue(String.class);
+                                    String date = dataSnapshot.child("date").getValue(String.class);
+                                    String description = dataSnapshot.child("description").getValue(String.class);
+                                    favouriteBookingItems.add(new StudBookingItem(id, CREATOR, title, prof, venue, date, description));
+                                    if(favouriteBookingItems.size() == numFav) {
+                                        displayFavourites();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+                        }
+                    } catch(Exception e){
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    displayFavourites();
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
@@ -173,36 +207,41 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
         //================================PENDING TAB================================
 
-        rv4 = (RecyclerView) findViewById(R.id.recyclerviewPending);
-        rv4.setLayoutManager(new LinearLayoutManager(this));
-        rv4.setItemAnimator(new DefaultItemAnimator());
-        searchPending = (SearchView) findViewById(R.id.searchPending);
-
         pendingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot aBooking: dataSnapshot.getChildren()) {
-                    rawPendingBookings.add(aBooking.getValue(String.class));
-                }
-                if (rawPendingBookings == null) {
-                    Toast.makeText(context, "No pending booking items", Toast.LENGTH_SHORT).show();
-                } else {
-                    pendingBookingsItems = getBookingItems(rawPendingBookings, true);
-                    adapter = new StudBookingDetailsAdapter(context, pendingBookingsItems);
-                }
+                numPend = (int) dataSnapshot.getChildrenCount();
                 try {
-                    //TODO: think of another work around the asynchronousity. progress bar?
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    for (DataSnapshot aBooking : dataSnapshot.getChildren()) {
+                        allPendingRef.child(aBooking.getValue(String.class)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String id = dataSnapshot.getKey();
+                                String title = dataSnapshot.child("title").getValue(String.class);
+                                String prof = dataSnapshot.child("prof").getValue(String.class);
+                                String venue = dataSnapshot.child("venue").getValue(String.class);
+                                String date = dataSnapshot.child("date").getValue(String.class);
+                                String description = dataSnapshot.child("description").getValue(String.class);
+                                pendingBookingsItems.add(new StudBookingItem(id, CREATOR, title, prof, venue, date, description));
+                                if(pendingBookingsItems.size() == numPend) {
+                                    displayPending();
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                }catch(Exception e){
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                displayPending();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
+        Toast.makeText(context, "Loading contents...", Toast.LENGTH_SHORT).show();
         //=============================================================================
 
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerLayout);
@@ -225,6 +264,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                 switch(item.getItemId()) {
                     case (R.id.side_feed):
                         Intent h= new Intent(StudBookingActivity.this,StudFeedActivity.class);
+                        h.putExtra("creator", CREATOR);
                         startActivity(h);
                         break;
                     case (R.id.side_booking):
@@ -232,6 +272,7 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                         break;
                     case (R.id.side_profile):
                         Intent i= new Intent(StudBookingActivity.this,StudProfileActivity.class);
+                        i.putExtra("creator", CREATOR);
                         startActivity(i);
                         break;
                     case(R.id.ic_search):
@@ -254,12 +295,14 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
                 switch(item.getItemId()) {
                     case (R.id.ic_feed):
                         Intent h= new Intent(StudBookingActivity.this,StudFeedActivity.class);
+                        h.putExtra("creator", CREATOR);
                         startActivity(h);
                         break;
                     case (R.id.ic_booking):
                         break;
                     case (R.id.ic_profile):
                         Intent i= new Intent(StudBookingActivity.this,StudProfileActivity.class);
+                        i.putExtra("creator", CREATOR);
                         startActivity(i);
                         break;
                     case(R.id.ic_search):
@@ -275,71 +318,28 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    public void runTimeComparison(){
-        //get the IDs
-        referredBookingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(int i = 0; i < rawBookings.size(); i++){
-                    timestamp = dataSnapshot.child(rawBookings.get(i)).child("timestamp").getValue(Long.class);
-                    if(timestamp >= System.currentTimeMillis()/1000){
-                        rawUpcomingBookings.add(rawBookings.get(i));
-                    } else{
-                        rawPreviousBookings.add(rawBookings.get(i));
-                    }
-                }
-
-                //================upcoming tab================
-                if (rawUpcomingBookings == null) {
-                    Toast.makeText(context, "No upcoming booking items", Toast.LENGTH_SHORT).show();
-                } else {
-                    upcomingBookingItems = getBookingItems(rawUpcomingBookings, false);
-                    adapter = new StudBookingDetailsAdapter(context, upcomingBookingItems);
-                }
-                try {
-                    //TODO: think of another work around the asynchronousity. progress bar?
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                displayUpcoming();
-
-                //================previous tab================
-                if (rawPreviousBookings == null) {
-                    Toast.makeText(context, "No previous booking items", Toast.LENGTH_SHORT).show();
-                } else {
-                    previousBookingItems = getBookingItems(rawPreviousBookings, false);
-                    adapter = new StudBookingDetailsAdapter(context, previousBookingItems);
-                }
-                try {
-                    //TODO: think of another work around the asynchronousity. progress bar?
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                displayPrevious();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
     public void displayUpcoming(){
         try {
-            rv1.setAdapter(adapter);
-            searchUpcoming.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(String query) {
-                    //filter as you type
-                    adapter.getFilter().filter(query);
-                    return false;
-                }
-            });
+            if(upcomingBookingItems == null){
+                Toast.makeText(context, "No upcoming booking items", Toast.LENGTH_SHORT).show();
+            } else {
+                rv1.setLayoutManager(new LinearLayoutManager(this));
+                rv1.setItemAnimator(new DefaultItemAnimator());
+                adapter1 = new StudBookingDetailsAdapter(context, upcomingBookingItems);
+                rv1.setAdapter(adapter1);
+                searchUpcoming.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        //filter as you type
+                        adapter1.getFilter().filter(query);
+                        return false;
+                    }
+                });
+            }
         } catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -347,19 +347,27 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
     public void displayPrevious(){
         try {
-            rv2.setAdapter(adapter);
-            searchPrev.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(String query) {
-                    //filter as you type
-                    adapter.getFilter().filter(query);
-                    return false;
-                }
-            });
+            if(previousBookingItems == null){
+                Toast.makeText(context, "No past booking items", Toast.LENGTH_SHORT).show();
+            } else {
+                rv2.setLayoutManager(new LinearLayoutManager(this));
+                rv2.setItemAnimator(new DefaultItemAnimator());
+                adapter2 = new StudBookingDetailsAdapter(context, previousBookingItems);
+                rv2.setAdapter(adapter2);
+                searchPrev.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        //filter as you type
+                        adapter2.getFilter().filter(query);
+                        return false;
+                    }
+                });
+            }
         } catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -367,19 +375,27 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
     public void displayFavourites(){
         try {
-            rv3.setAdapter(adapter);
-            searchFavs.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(String query) {
-                    //filter as you type
-                    adapter.getFilter().filter(query);
-                    return false;
-                }
-            });
+            if(favouriteBookingItems == null){
+                Toast.makeText(context, "No favourite booking items", Toast.LENGTH_SHORT).show();
+            } else {
+                rv3.setLayoutManager(new LinearLayoutManager(this));
+                rv3.setItemAnimator(new DefaultItemAnimator());
+                adapter3 = new StudBookingDetailsAdapter(context, favouriteBookingItems);
+                rv3.setAdapter(adapter3);
+                searchFavs.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        //filter as you type
+                        adapter3.getFilter().filter(query);
+                        return false;
+                    }
+                });
+            }
         } catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -387,31 +403,30 @@ public class StudBookingActivity extends AppCompatActivity implements Navigation
 
     public void displayPending(){
         try {
-            rv4.setAdapter(adapter);
-            searchPending.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(String query) {
-                    //filter as you type
-                    adapter.getFilter().filter(query);
-                    return false;
-                }
-            });
+            if(pendingBookingsItems == null){
+                Toast.makeText(context, "No pending booking requests", Toast.LENGTH_SHORT).show();
+            } else {
+                rv4.setLayoutManager(new LinearLayoutManager(this));
+                rv4.setItemAnimator(new DefaultItemAnimator());
+                adapter4 = new StudBookingDetailsAdapter(context, pendingBookingsItems);
+                rv4.setAdapter(adapter4);
+                searchPending.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        //filter as you type
+                        adapter4.getFilter().filter(query);
+                        return false;
+                    }
+                });
+            }
         } catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public ArrayList<StudBookingItem> getBookingItems(ArrayList<String> rawBookingItems, boolean isPending){
-        ArrayList<StudBookingItem> bookingItems = new ArrayList<>();
-        for (int i = 0; i < rawBookingItems.size(); i++) {
-            StudBookingItem bookingItem = new StudBookingItem(context, rawBookingItems.get(i), isPending);
-            bookingItems.add(bookingItem);
-        }
-        return bookingItems;
     }
 
     @Override

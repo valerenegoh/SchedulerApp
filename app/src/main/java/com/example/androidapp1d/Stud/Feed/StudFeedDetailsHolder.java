@@ -14,7 +14,7 @@ import com.example.androidapp1d.Stud.Booking.CardItemClickListener;
 
 public class StudFeedDetailsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    TextView announcement, title, prof, time, description;
+    TextView announcement, mod, prof, creator, description;
     Button details;
 
     CardItemClickListener itemClickListener;
@@ -22,9 +22,9 @@ public class StudFeedDetailsHolder extends RecyclerView.ViewHolder implements Vi
     public StudFeedDetailsHolder(View itemView) {
         super(itemView);
         this.announcement = (TextView) itemView.findViewById(R.id.announcement);
-        this.title = (TextView) itemView.findViewById(R.id.feedTitle);
+        this.mod = (TextView) itemView.findViewById(R.id.mod);
         this.prof = (TextView) itemView.findViewById(R.id.feedProf);
-        this.time = (TextView) itemView.findViewById(R.id.feed_time);
+        this.creator = (TextView) itemView.findViewById(R.id.creator);
         this.description = (TextView) itemView.findViewById(R.id.feedDescription);
         this.details = (Button) itemView.findViewById(R.id.feedDetailsButton);
 

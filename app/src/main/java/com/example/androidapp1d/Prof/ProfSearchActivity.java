@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.androidapp1d.Prof.Booking.ProfBookingActivity;
+import com.example.androidapp1d.Prof.Feed.ProfFeedActivity;
+import com.example.androidapp1d.Prof.Profile.ProfProfileActivity;
 import com.example.androidapp1d.R;
 
 import java.util.ArrayList;
