@@ -1,8 +1,9 @@
 # SchdulerApp
 SUTD Term 3 Second Android App Project
 
-# Contributors
+## Contributors
 UI Design & Firebase Database: Valerene Goh
+
 Report: Tracy Yee
 
 ## Introduction
@@ -44,17 +45,17 @@ individual components.
 • Subsystems can be easily replaced or modified without affecting other subsystems.
 
 ### Real-Time Database (integrating Firebase with our app)
-• The dynamic content and user database are all stored and retrieved from firebase whenever needed e.g. user authentication and syncing of real-time data between users (refer to Fig. 2d)
+• The dynamic content and user database are all stored and retrieved from firebase whenever needed e.g. user authentication and syncing of real-time data between users
 
 • The Firebase database stores information in NoSQL (similar to a huge JSON file) hosted in the Google Cloud.
 
   - Real-Time: When information is altered, it is instantly synchronised with the Cloud within milliseconds (no batching and grouping of data before being sent)
 
-    o When users update information in the app, e.g. creating a new user account or adding a new booking, we push nodes into our database with a unique key as an ID and the changes are reflected in the database structure (refer to Fig. 2d).
+    o When users update information in the app, e.g. creating a new user account or adding a new booking, we push nodes into our database with a unique key as an ID and the changes are reflected in the database structure.
   
   - Automatic synchronization and conflict solving: devices can subscribe to sections of the database and automatically retrieve the required data when it is being altered
 
-    o The app also gets notified whenever data has been changed in the database by subscribing to any value that is changed in the specified node, e.g. an account created using the app (refer to Fig. 2e) is now activated and can be used to sign into our app.
+    o The app also gets notified whenever data has been changed in the database by subscribing to any value that is changed in the specified node, e.g. an account created using the app is now activated and can be used to sign into our app.
 
 ## Further development Plan:
 • We plan to launch the app in SUTD for small-scale market testing to determine the suitability of our app and adjust it based on the feedback from users. If it is successful, we will look to expand to other organisations, e.g. other educational institutions, offices, etc.
