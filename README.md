@@ -1,4 +1,4 @@
-# SchdulerApp
+# SchedulerApp
 SUTD Term 3 Second Android App Project
 
 ## Contributors
