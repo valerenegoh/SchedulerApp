@@ -82,6 +82,7 @@ individual components.
     o The app also gets notified whenever data has been changed in the database by subscribing to any value that is changed in the specified node, e.g. an account created using the app is now activated and can be used to sign into our app.
     
 Organistion of data in Firebase:
+
 <img width="140" alt="firebase" src="https://user-images.githubusercontent.com/23626462/35307682-cc5af11e-00de-11e8-8ad0-d6da30d7ddcf.PNG">
 
 ## Further development Plan:
