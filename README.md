@@ -35,22 +35,22 @@ approve / reject the slot entirely
 
 <img width="160" alt="2" src="https://user-images.githubusercontent.com/23626462/35309077-947d8b7e-00e5-11e8-9791-287d550b0c6e.png">
 
-Student registration
+### Student registration
 <img width="161" alt="1" src="https://user-images.githubusercontent.com/23626462/35309076-9448b052-00e5-11e8-8831-c9a8927c6b74.png"><img width="160" alt="7" src="https://user-images.githubusercontent.com/23626462/35309082-95a6abde-00e5-11e8-898e-47c3ce8f9228.png"><img width="159" alt="8" src="https://user-images.githubusercontent.com/23626462/35309083-95dac680-00e5-11e8-87a2-e3c1dee24d30.png">
 
-Professor registration
+#### Professor registration
 <img width="160" alt="6" src="https://user-images.githubusercontent.com/23626462/35309081-9572424a-00e5-11e8-8a8a-fe0f73d84c6d.png"><img width="160" alt="3" src="https://user-images.githubusercontent.com/23626462/35309078-94e1df5c-00e5-11e8-89ba-f422f8f1a76d.png"><img width="160" alt="4" src="https://user-images.githubusercontent.com/23626462/35309079-9511156a-00e5-11e8-9000-38ced481181c.png"><img width="160" alt="5" src="https://user-images.githubusercontent.com/23626462/35309080-953f2cb6-00e5-11e8-9691-e167efe7dfe5.png">
 
-Booking
+### Booking
 <img width="162" alt="13" src="https://user-images.githubusercontent.com/23626462/35309088-96d2198a-00e5-11e8-9e8b-d6296e8d3495.png"><img width="160" alt="14" src="https://user-images.githubusercontent.com/23626462/35309089-970104c0-00e5-11e8-87ec-229c0a6b6e0d.png"><img width="161" alt="15" src="https://user-images.githubusercontent.com/23626462/35309090-9731f968-00e5-11e8-98be-893c458bdddc.png"><img width="162" alt="16" src="https://user-images.githubusercontent.com/23626462/35309091-97639ba8-00e5-11e8-9c4c-7d75a2e2e871.png"><img width="161" alt="17" src="https://user-images.githubusercontent.com/23626462/35309092-97923044-00e5-11e8-803c-5a37a2f1ad26.png"><img width="161" alt="18" src="https://user-images.githubusercontent.com/23626462/35309093-97bfb9f6-00e5-11e8-96f6-f7579fe1ed95.png">
 
-Main Feed displays all consultations booking pertaining to your selected modules and professors that are within three days of appointment.
+### Main Feed displays all consultations booking pertaining to your selected modules and professors that are within three days of appointment.
 <img width="161" alt="29" src="https://user-images.githubusercontent.com/23626462/35309074-93e95256-00e5-11e8-9c92-4151f5f9176d.png">
 
-Bookings Tab displays your previous, upcoming, favourited and pending bookings.
-<img width="160" alt="10" src="https://user-images.githubusercontent.com/23626462/35309085-963dd7a2-00e5-11e8-9254-85075baede99.png"><img width="160" alt="11" src="https://user-images.githubusercontent.com/23626462/35309086-966b9278-00e5-11e8-91df-5d5ebb272d10.png"><img width="161" alt="12" src="https://user-images.githubusercontent.com/23626462/35309087-96a10aac-00e5-11e8-8fb6-4ca797c023ab.png">
+### Bookings Tab displays your previous, upcoming, favourited and pending bookings.
+<img width="160" alt="9" src="https://user-images.githubusercontent.com/23626462/35312823-5f28f270-00f8-11e8-9b3a-4cd220786b2e.png"><img width="160" alt="10" src="https://user-images.githubusercontent.com/23626462/35309085-963dd7a2-00e5-11e8-9254-85075baede99.png"><img width="160" alt="11" src="https://user-images.githubusercontent.com/23626462/35309086-966b9278-00e5-11e8-91df-5d5ebb272d10.png"><img width="161" alt="12" src="https://user-images.githubusercontent.com/23626462/35309087-96a10aac-00e5-11e8-8fb6-4ca797c023ab.png">
 
-Profile Tab
+### Profile Tab
 <img width="161" alt="19" src="https://user-images.githubusercontent.com/23626462/35309094-97f2ef24-00e5-11e8-9b41-2b7081a9dc6b.png"><img width="160" alt="20" src="https://user-images.githubusercontent.com/23626462/35309095-98278888-00e5-11e8-952c-f01d69314c54.png"><img width="160" alt="27" src="https://user-images.githubusercontent.com/23626462/35309072-9387fce0-00e5-11e8-94c5-f2141b370657.png"><img width="161" alt="28" src="https://user-images.githubusercontent.com/23626462/35309073-93b5db10-00e5-11e8-92ae-d8c54cdd7a49.png"><img width="162" alt="21" src="https://user-images.githubusercontent.com/23626462/35309096-985ba104-00e5-11e8-9a6a-20a06a17013a.png"><img width="160" alt="26" src="https://user-images.githubusercontent.com/23626462/35309071-93594242-00e5-11e8-902b-8fae787e901b.png"><img width="160" alt="22" src="https://user-images.githubusercontent.com/23626462/35309098-988e8376-00e5-11e8-944f-ab60f31c725d.png"><img width="161" alt="23" src="https://user-images.githubusercontent.com/23626462/35309099-98c1d5e6-00e5-11e8-8592-e6641a4016b8.png"><img width="160" alt="24" src="https://user-images.githubusercontent.com/23626462/35309100-98f24e10-00e5-11e8-8c92-fd8e1b17ef82.png"><img width="160" alt="25" src="https://user-images.githubusercontent.com/23626462/35309101-9921f25a-00e5-11e8-9b19-b7c4a250a939.png">
 
 ## System Design and Implementation:
