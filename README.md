@@ -6,6 +6,8 @@ UI Design & Firebase Database: Valerene Goh
 
 Report content: Tracy Yee
 
+![27](https://user-images.githubusercontent.com/23626462/35308616-6f589bb0-00e3-11e8-81ea-9e0b43583be3.png)
+
 ## Introduction
 In this report, we will summarise our proposal, design and development of a meaningful solution to an open problem using the information systems concepts, software and system components.
 
