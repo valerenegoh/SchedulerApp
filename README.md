@@ -38,7 +38,7 @@ approve / reject the slot entirely
 ### Student registration
 <img width="161" alt="1" src="https://user-images.githubusercontent.com/23626462/35309076-9448b052-00e5-11e8-8831-c9a8927c6b74.png"><img width="160" alt="7" src="https://user-images.githubusercontent.com/23626462/35309082-95a6abde-00e5-11e8-898e-47c3ce8f9228.png"><img width="159" alt="8" src="https://user-images.githubusercontent.com/23626462/35309083-95dac680-00e5-11e8-87a2-e3c1dee24d30.png">
 
-#### Professor registration
+### Professor registration
 <img width="160" alt="6" src="https://user-images.githubusercontent.com/23626462/35309081-9572424a-00e5-11e8-8a8a-fe0f73d84c6d.png"><img width="160" alt="3" src="https://user-images.githubusercontent.com/23626462/35309078-94e1df5c-00e5-11e8-89ba-f422f8f1a76d.png"><img width="160" alt="4" src="https://user-images.githubusercontent.com/23626462/35309079-9511156a-00e5-11e8-9000-38ced481181c.png"><img width="160" alt="5" src="https://user-images.githubusercontent.com/23626462/35309080-953f2cb6-00e5-11e8-9691-e167efe7dfe5.png">
 
 ### Booking
