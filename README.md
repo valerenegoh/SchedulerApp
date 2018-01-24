@@ -32,35 +32,13 @@ approve / reject the slot entirely
 - Venue booking: Pre-allocated venues proportional to the consultation group size are automatically assigned to the consultations when they are booked
 
 ## UI Slices
-![4](https://user-images.githubusercontent.com/23626462/35307492-02d82014-00de-11e8-9737-bcba7da66b06.jpeg)
-![5](https://user-images.githubusercontent.com/23626462/35307493-030edae6-00de-11e8-890c-01d8cb1390c7.jpeg)
-![6](https://user-images.githubusercontent.com/23626462/35307494-03450512-00de-11e8-85cb-78d76e1639db.jpeg)
-![7](https://user-images.githubusercontent.com/23626462/35307495-037a2bf2-00de-11e8-86e9-163275c12b74.jpeg)
-![8](https://user-images.githubusercontent.com/23626462/35307496-03b38032-00de-11e8-9d6f-b9d66cf49e7c.jpeg)
-![9](https://user-images.githubusercontent.com/23626462/35307499-03f02780-00de-11e8-8598-a914888b9c8b.jpeg)
-![10](https://user-images.githubusercontent.com/23626462/35307503-045da36e-00de-11e8-818e-cea71e674efa.jpeg)
-![11](https://user-images.githubusercontent.com/23626462/35307505-049301c6-00de-11e8-9408-37a6bccf4903.jpeg)
-![12](https://user-images.githubusercontent.com/23626462/35307506-04c958d4-00de-11e8-8e6e-2849f1f60ef1.jpeg)
-![13](https://user-images.githubusercontent.com/23626462/35307507-04fe355e-00de-11e8-9f84-2fd83420150b.jpeg)
-![14](https://user-images.githubusercontent.com/23626462/35307509-05436c46-00de-11e8-899b-30a86054a067.jpeg)
-![15](https://user-images.githubusercontent.com/23626462/35307510-0578268e-00de-11e8-969d-d132e30f2267.jpeg)
-![16](https://user-images.githubusercontent.com/23626462/35307511-05aefc90-00de-11e8-9d51-9c4ab661d447.jpeg)
-![17](https://user-images.githubusercontent.com/23626462/35307513-05e7ed2a-00de-11e8-9f04-4115efe32175.jpeg)
-![18](https://user-images.githubusercontent.com/23626462/35307514-061e60c6-00de-11e8-9d36-ce17b37d121a.jpeg)
-![19](https://user-images.githubusercontent.com/23626462/35307515-0653df44-00de-11e8-8221-91bcbb0cfdf5.jpeg)
-![20](https://user-images.githubusercontent.com/23626462/35307516-0691b206-00de-11e8-9df4-80cc1c99cb80.jpeg)
-![21](https://user-images.githubusercontent.com/23626462/35307517-06c299d4-00de-11e8-9f5d-24337e6ceae3.jpeg)
-![22](https://user-images.githubusercontent.com/23626462/35307519-06f58286-00de-11e8-8c77-a26e571f1f45.jpeg)
-![23](https://user-images.githubusercontent.com/23626462/35307520-0727c99e-00de-11e8-9748-cf7a52b2920b.jpeg)
-![24](https://user-images.githubusercontent.com/23626462/35307521-075eb9f4-00de-11e8-8261-dd1f526b6840.jpeg)
-![25](https://user-images.githubusercontent.com/23626462/35307522-07916016-00de-11e8-9f16-5a6af7e5c953.jpeg)
-![26](https://user-images.githubusercontent.com/23626462/35307523-07c0bcbc-00de-11e8-912a-461d43de9c54.jpeg)
-![27](https://user-images.githubusercontent.com/23626462/35307524-07f31806-00de-11e8-8ea1-be74199d22f0.jpeg)
-![28](https://user-images.githubusercontent.com/23626462/35307525-08236088-00de-11e8-8e80-ae6f69830a69.jpeg)
-![29](https://user-images.githubusercontent.com/23626462/35307526-08567252-00de-11e8-998a-efa845c0818e.jpeg)
-![1](https://user-images.githubusercontent.com/23626462/35307527-088a86be-00de-11e8-8fef-c6c098a88d54.jpeg)
-![2](https://user-images.githubusercontent.com/23626462/35307528-08c2aa12-00de-11e8-824c-93c18a7eb84b.jpeg)
-![3](https://user-images.githubusercontent.com/23626462/35307529-08f7c562-00de-11e8-85aa-046710ddc088.jpeg)
+
+Student registration
+
+Professor registration
+
+Booking consultation
+
 
 ## System Design and Implementation:
 
