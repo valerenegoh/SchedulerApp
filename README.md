@@ -2,7 +2,7 @@
 SUTD Term 3 Second Android App Project
 
 ## Contributors
-UI Design & Firebase Database: Valerene Goh
+UI Design, Firebase Database & prototype: Valerene Goh
 
 Report content: Tracy Yee
 
