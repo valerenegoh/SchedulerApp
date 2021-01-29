@@ -1,5 +1,5 @@
 # SchedulerApp
-SUTD Term 4 Second Android App Project
+SUTD ISTD Term 4 Second Android App Project
 
 ## Contributors
 UI Design, Firebase Database & prototype: Valerene Goh
